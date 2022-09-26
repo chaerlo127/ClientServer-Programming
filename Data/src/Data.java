@@ -1,30 +1,31 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.Naming;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-public class Server extends UnicastRemoteObject implements ServerIF{
+public class Data extends UnicastRemoteObject implements DataIF{
+	protected static StudentList studentList;
 	private static final long serialVersionUID = 1L;
-	private static DataIF data;
+	private static String path = "C:\\Users\\chaeun\\Desktop\\JAVA\\workspace\\ClientServerProgramming\\Data";
 	String name;
-	protected Server() throws RemoteException {
+	
+	protected Data() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	// 프로세스 
-	public static void main(String[] args) throws NotBoundException {
+	public static void main(String[] args) throws FileNotFoundException, IOException {
 			// 브로커에 등록을 해줌. 
 			try {
-	
-				Server server = new Server();
-				Naming.bind("Server", server);
-				System.out.println("Server is ready !!!");
-				// Data 코드 호출하기
-				data = (DataIF) Naming.lookup("Data");
-				System.out.println("Data's answer: " + server.getAllStudentData());
+				Data data = new Data();
+				Naming.bind("Data", data);
+				System.out.println("Data is ready !!!");
+				studentList = new StudentList(path+"\\Students.txt");
+				
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -35,17 +36,13 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+
+
 	}
-	public int add(int a, int b) {  
-		System.out.println("Server's response !!!");
-		return a+b;
-	}
-	public void save(String name) throws RemoteException {
-		System.out.println("Server's response !!!");
-		this.name = name;
-	}
+
 	@Override
 	public ArrayList<Student> getAllStudentData() throws RemoteException {
-		return data.getAllStudentData();
+		return studentList.getAllStudentRecords();
 	}
 }

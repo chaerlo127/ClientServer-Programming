@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -11,9 +14,23 @@ public class Client {
 
 	public static void main(String[] args) {
 		ServerIF server;
+		BufferedReader objReader = new BufferedReader(new InputStreamReader(System.in));
+		
 		try {
-			server = (ServerIF) Naming.lookup("AddServer");
-			System.out.println("Server's answer: " + server.add(235, 212));
+			server = (ServerIF) Naming.lookup("Server");
+			System.out.println("****************************MENU****************************");
+			System.out.println("1. List Students");
+			System.out.println("2. List Courses");
+			
+			String sChoice = objReader.readLine().trim();
+			
+			if(sChoice.equals("1")) {
+				System.out.println("Server's answer: " + server.getAllStudentData());
+			}
+			else if(sChoice.equals("2")) {
+				// 수강 과목 리스트 불러오기 
+				System.out.println("Homework!!!");
+			}
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -21,6 +38,9 @@ public class Client {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
