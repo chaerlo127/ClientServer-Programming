@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class Data extends UnicastRemoteObject implements DataIF{
 	protected static StudentList studentList;
+	protected static CourseList courseList;
 	private static final long serialVersionUID = 1L;
 	private static String path = "C:\\Users\\chaeun\\Desktop\\JAVA\\workspace\\ClientServerProgramming\\Data";
 	String name;
@@ -25,7 +26,7 @@ public class Data extends UnicastRemoteObject implements DataIF{
 				Naming.bind("Data", data);
 				System.out.println("Data is ready !!!");
 				studentList = new StudentList(path+"\\Students.txt");
-				
+				courseList = new CourseList(path+"\\Courses.txt");
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -44,5 +45,9 @@ public class Data extends UnicastRemoteObject implements DataIF{
 	@Override
 	public ArrayList<Student> getAllStudentData() throws RemoteException {
 		return studentList.getAllStudentRecords();
+	}
+	@Override
+	public ArrayList<Course> getAllCourseList() throws RemoteException {
+		return courseList.getAllCourseRecords();
 	}
 }
