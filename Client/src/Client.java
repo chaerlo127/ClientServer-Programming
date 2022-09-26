@@ -26,11 +26,13 @@ public class Client {
 			
 			if(sChoice.equals("1")) {
 				// 리스트 이쁘게 보여주기
-				System.out.println("Server's answer: " + server.getAllStudentData());
+				System.out.println("Server's answer: ");
+				System.out.println(server.getAllStudentData());
 			}
 			else if(sChoice.equals("2")) {
 				// 수강 과목 리스트 불러오기 
-				System.out.println("Server's answer: " + server.getAllCourseList());
+				System.out.println("Server's answer: ");
+				System.out.println(server.getAllCourseList());
 			}
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block

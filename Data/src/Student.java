@@ -30,11 +30,15 @@ public class Student implements Serializable{
     public ArrayList<String> getCompletedCourses() {
         return this.completedCoursesList;
     }
+    
     public String toString() {
-        String stringReturn = this.studentId + " " + this.name + " " + this.department;
+    	StringBuilder sb = new StringBuilder();
+    	
+        sb.append(this.studentId + " " + this.name + " " + this.department).append(" ");
         for (int i = 0; i < this.completedCoursesList.size(); i++) {
-            stringReturn = stringReturn + " " + this.completedCoursesList.get(i).toString();
+        	sb.append(this.completedCoursesList.get(i).toString()).append(" ");
         }
-        return stringReturn;
+        sb.append("\n");
+        return sb.toString();
     }
 }

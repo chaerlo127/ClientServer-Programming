@@ -24,7 +24,6 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 				System.out.println("Server is ready !!!");
 				// Data 코드 호출하기
 				data = (DataIF) Naming.lookup("Data");
-				System.out.println("Data's answer: " + server.getAllStudentData());
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

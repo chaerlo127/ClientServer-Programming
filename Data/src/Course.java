@@ -30,10 +30,13 @@ public class Course implements Serializable{
         return this.precourseNameList;
     }
     public String toString() {
-        String stringReturn = this.courseId + " " + this.name + " ";
+    	StringBuilder sb = new StringBuilder();
+    	
+        sb.append(this.courseId + " " + this.name + " ");
         for (int i = 0; i < this.precourseNameList.size(); i++) {
-            stringReturn = stringReturn + " " + this.precourseNameList.get(i).toString();
+        	sb.append(this.precourseNameList.get(i).toString()).append(" ");
         }
-        return stringReturn;
+        sb.append("\n");
+        return sb.toString();
     }
 }
