@@ -8,7 +8,7 @@ public class Student implements Serializable{
 	protected String studentId;
     protected String name;
     protected String department;
-    protected ArrayList<String> completedCoursesList;
+    protected ArrayList<String> vStudent;
 
     // 여러 정보들을 자바의 class 형태로 : Entity Class, Value Object
     public Student(String inputString) {
@@ -16,29 +16,29 @@ public class Student implements Serializable{
     	this.studentId = stringTokenizer.nextToken();
     	this.name = stringTokenizer.nextToken();
     	this.department = stringTokenizer.nextToken();
-    	this.completedCoursesList = new ArrayList<String>();
+    	this.vStudent = new ArrayList<String>();
     	while (stringTokenizer.hasMoreTokens()) {
-    		this.completedCoursesList.add(stringTokenizer.nextToken());
+    		this.vStudent.add(stringTokenizer.nextToken());
     	}
     }
+    
     public boolean match(String studentId) {
         return this.studentId.equals(studentId);
     }
+    
     public String getName() {
         return this.name;
     }
+    
     public ArrayList<String> getCompletedCourses() {
-        return this.completedCoursesList;
+        return this.vStudent;
     }
     
     public String toString() {
-    	StringBuilder sb = new StringBuilder();
-    	
-        sb.append(this.studentId + " " + this.name + " " + this.department).append(" ");
-        for (int i = 0; i < this.completedCoursesList.size(); i++) {
-        	sb.append(this.completedCoursesList.get(i).toString()).append(" ");
+        String stringReturn = this.studentId + " " + this.name + " " + this.department;
+        for (int i = 0; i < this.vStudent.size(); i++) {
+            stringReturn = stringReturn + " " + this.vStudent.get(i).toString();
         }
-        sb.append("\n");
-        return sb.toString();
+        return stringReturn;
     }
 }

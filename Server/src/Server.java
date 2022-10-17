@@ -16,45 +16,37 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	}
 	// 프로세스 
 	public static void main(String[] args) {
-			// 브로커에 등록을 해줌. 
-			try {
-
-				Server server = new Server();
-				Naming.bind("Server", server);
-				System.out.println("Server is ready !!!");
-				// Data 코드 호출하기
-				data = (DataIF) Naming.lookup("Data");
-			} catch (MalformedURLException e) {
-				System.out.println("MalformedURLException: rmiRegistry를 찾을 수 없습니다.");
-//					e.printStackTrace();
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				System.out.println("RemoteException: 원격지에서 예외가 발생했습니다.");
-//					e.printStackTrace();
-			} catch (AlreadyBoundException e) {
-				// TODO Auto-generated catch block
-				System.out.println("AlreadyBoundException: 이미 rmiRegistry에 연결이 되었습니다.");
-//					e.printStackTrace();
-			} catch (NotBoundException e) {
-				// TODO Auto-generated catch block
-				System.out.println("NotBoundException: 이미 rmiRegistry에 연결할 Data가 없습니다.");
-//				e.printStackTrace();
-			}
+		try {
+			Server server = new Server();
+			Naming.bind("Server", server);
+			System.out.println("Server is ready !!!");
+			data = (DataIF) Naming.lookup("Data");
+		} catch (MalformedURLException e) {System.out.println("MalformedURLException: rmiRegistry를 찾을 수 없습니다.");} 
+		catch (RemoteException e) {System.out.println("RemoteException: 원격지에서 예외가 발생했습니다.");} 
+		catch (AlreadyBoundException e) {System.out.println("AlreadyBoundException: 이미 rmiRegistry에 연결이 되었습니다.");} 
+		catch (NotBoundException e) {System.out.println("NotBoundException: 이미 rmiRegistry에 연결할 Data가 없습니다.");}
 	}
-	public int add(int a, int b) {  
-		System.out.println("Server's response !!!");
-		return a+b;
-	}
-	public void save(String name) throws RemoteException {
-		System.out.println("Server's response !!!");
-		this.name = name;
-	}
+	
 	@Override
-	public ArrayList<Student> getAllStudentData() throws RemoteException {
+	public ArrayList<Student> getAllStudentData() throws RemoteException, NullDataException{
 		return data.getAllStudentData();
 	}
+	
 	@Override
-	public ArrayList<Course> getAllCourseList() throws RemoteException {
+	public boolean addStudent(String studentInfo) throws RemoteException, NullDataException {
+		if(data.addStudent(studentInfo)) return true;
+		else return false;
+	}
+	
+	@Override
+	public boolean deleteStudent(String studentId) throws RemoteException { // exception이 있다면 여기서 해야함. 
+		if(data.deleteStudent(studentId)) return true;
+		else return false;
+	}
+	
+	@Override
+	public ArrayList<Course> getAllCourseList() throws RemoteException, NullDataException{
 		return data.getAllCourseList();
 	}
+
 }

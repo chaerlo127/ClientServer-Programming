@@ -20,23 +20,24 @@ public class Course implements Serializable{
     		this.precourseNameList.add(stringTokenizer.nextToken());
     	}
     }
+    
     public boolean match(String courseId) {
         return this.courseId.equals(courseId);
     }
+    
     public String getName() {
         return this.name;
     }
+    
     public ArrayList<String> getPrecourseName() {
         return this.precourseNameList;
     }
+    
     public String toString() {
-    	StringBuilder sb = new StringBuilder();
-    	
-        sb.append(this.courseId + " " + this.name + " ");
+        String stringReturn = this.courseId + " " + this.name + " " + this.courseName;
         for (int i = 0; i < this.precourseNameList.size(); i++) {
-        	sb.append(this.precourseNameList.get(i).toString()).append(" ");
+            stringReturn = stringReturn + " " + this.precourseNameList.get(i).toString();
         }
-        sb.append("\n");
-        return sb.toString();
+        return stringReturn;
     }
 }

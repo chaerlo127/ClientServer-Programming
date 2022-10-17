@@ -20,7 +20,8 @@ public class CourseList {
 		objCourseFile.close();
 	}
 
-	public ArrayList<Course> getAllCourseRecords() {
+	public ArrayList<Course> getAllCourseRecords() throws NullDataException{
+		if(this.vCourse.size() == 0) throw new NullDataException("-------------- Course data is null --------------");
 		return this.vCourse;
 	}
 

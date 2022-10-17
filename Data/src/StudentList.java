@@ -6,28 +6,46 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class StudentList {
-	protected ArrayList<Student> vStudent;
+	protected ArrayList<Student> vStudentList;
 	
 	public StudentList(String sStudentFileName) throws FileNotFoundException, IOException {
 		BufferedReader objStudentFile = new BufferedReader(new FileReader(sStudentFileName));
-		this.vStudent = new ArrayList<Student>();
+		this.vStudentList = new ArrayList<Student>();
 		while (objStudentFile.ready()) {
 			String stuInfo = objStudentFile.readLine();
 			if (!stuInfo.equals("")) {
-				this.vStudent.add(new Student(stuInfo));
+				this.vStudentList.add(new Student(stuInfo));
 			}
 		}
 		objStudentFile.close();
 	}
 
-	public ArrayList<Student> getAllStudentRecords() {
-		return this.vStudent;
+	public ArrayList<Student> getAllStudentRecords() throws NullDataException{
+		if(this.vStudentList.size() == 0) throw new NullDataException("-------------- Student data is null --------------");
+		return this.vStudentList;
 	}
-
+	
+	public boolean addStudentRecords(String studentInfo) throws NullDataException { // student로 해도 됨. 어려움. 예외 사항 발생
+		if(studentInfo == null) throw new NullDataException("-------------- studentInfo data is null --------------");
+		if(this.vStudentList.add(new Student(studentInfo))) return true;
+		else return false;
+	}
+	
+	public boolean deleteStudentRecords(String studentId) {
+		for (int i = 0; i < this.vStudentList.size(); i++) {
+			Student student = (Student) this.vStudentList.get(i);
+			if (student.match(studentId)) {
+				if(this.vStudentList.remove(student)) return true;
+				else return false;
+			}
+		}
+		return false;
+	}
+	
 	public boolean isRegisteredStudent(String sSID) {
-		for (int i = 0; i < this.vStudent.size(); i++) {
-			Student objStudent = (Student) this.vStudent.get(i);
-			if (objStudent.match(sSID)) {
+		for (int i = 0; i < this.vStudentList.size(); i++) {
+			Student student = (Student) this.vStudentList.get(i);
+			if (student.match(sSID)) {
 				return true;
 			}
 		}
