@@ -60,5 +60,20 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 		if(data.deleteCourse(courseId)) return true;
 		else return false;
 	}
+	@Override
+	public boolean addReservation(String reservationInfo) throws RemoteException, NullDataException {
+		if(data.addReservation(reservationInfo)) return true;
+		// course 정보가 같으면 에러
+		else return false;
+	}
+	@Override
+	public boolean deleteReservation(String reservationId) throws RemoteException {
+		if(data.deleteReservation(reservationId)) return true;
+		else return false;
+	}
+	@Override
+	public ArrayList<Reservation> getAllReservationList() throws RemoteException, NullDataException {
+		return data.getAllReservationList();
+	}
 
 }

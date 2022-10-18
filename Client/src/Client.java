@@ -24,7 +24,8 @@ public class Client {
 					case "4": addCourse(server, objReader);	break;
 					case "5": deleteStudent(server, objReader);	break;
 					case "6": deleteCourse(server, objReader); break;
-					case "7": /* Make reservation(수강 신청: Student ID Course ID 넣고 저장): student 체크, courseId 체크, 선수 과목 체크 home work */ break;
+					case "7": makeReservation(server, objReader); break;
+					case "8": showData(server.getAllReservationList()); break;
 					case "0": return;
 					default: System.out.println("***********잘못입력했습니다. 다시 입력해주세요.***********"); break;
 				}
@@ -35,6 +36,19 @@ public class Client {
 		catch (NotBoundException e) {System.out.println("NotBoundException: 이미 rmiRegistry에 연결할 Data가 없습니다.");}
 		catch (IOException e) {	System.out.println("IOException: 파일을 읽어올 수 없습니다.");}
 		catch(NullDataException e) {System.out.println("NullDataException: 데이터에 값이 없습니다."); e.printStackTrace();}
+	}
+
+
+
+	private static void makeReservation(ServerIF server, BufferedReader objReader) throws IOException, RemoteException, NullDataException {
+		/* Make reservation(수강 신청: Student ID Course ID 넣고 저장): student 체크, courseId 체크, 선수 과목 체크 home work */
+		System.out.println("----------- Reservation Information -----------"); 
+		System.out.print("Student ID: "); String studentId = objReader.readLine().trim();
+		System.out.print("Course ID: "); String courseId = objReader.readLine().trim();
+		
+		if(server.addReservation(studentId + " " + courseId)) System.out.println("SUCCESS");
+		else System.out.println("FAIL");
+		
 	}
 
 
@@ -94,6 +108,8 @@ public class Client {
 		System.out.println("4. Add Course");
 		System.out.println("5. Delete Student");
 		System.out.println("6. Delete Course");
+		System.out.println("7. Make Reservation");
+		System.out.println("8. List Reservation");
 		System.out.println("0. End");
 	}
 

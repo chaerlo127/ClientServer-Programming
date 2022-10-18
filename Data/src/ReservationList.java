@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class ReservationList {
 	protected ArrayList<Reservation> vReservList;
 	
-	public ReservationList(String sStudentFileName){
+	public ReservationList(){
 		this.vReservList = new ArrayList<Reservation>();
 	}
 

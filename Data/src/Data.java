@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class Data extends UnicastRemoteObject implements DataIF{
 	protected static StudentList studentList;
 	protected static CourseList courseList;
+	protected static ReservationList reservationList;
 	private static final long serialVersionUID = 1L;
 	private static String path = "C:\\Users\\chaeun\\Desktop\\JAVA\\workspace\\ClientServerProgramming\\Data";
 	String name;
@@ -26,6 +27,7 @@ public class Data extends UnicastRemoteObject implements DataIF{
 			System.out.println("Data is ready !!!");
 			studentList = new StudentList(path + "\\Students.txt");
 			courseList = new CourseList(path + "\\Courses.txt");
+			reservationList = new ReservationList();
 		} 
 		catch (MalformedURLException e) {System.out.println("MalformedURLException: rmiRegistry를 찾을 수 없습니다.");} 
 		catch (RemoteException e) {System.out.println("RemoteException: 원격지에서 예외가 발생했습니다.");} 
@@ -66,6 +68,23 @@ public class Data extends UnicastRemoteObject implements DataIF{
 	public boolean deleteCourse(String courseId) throws RemoteException {
 		if(courseList.deleteCourseRecords(courseId)) return true;
 		else return false;
+	}
+
+	@Override
+	public boolean addReservation(String reservationInfo) throws RemoteException, NullDataException {
+		if(reservationList.addReservationRecords(reservationInfo)) return true;
+		else return false;
+	}
+
+	@Override
+	public boolean deleteReservation(String reservationId) throws RemoteException {
+		if(reservationList.deleteReservationRecords(reservationId)) return true;
+		else return false;
+	}
+
+	@Override
+	public ArrayList<Reservation> getAllReservationList() throws RemoteException, NullDataException {
+		return reservationList.getAllReservation();
 	}
 
 	
