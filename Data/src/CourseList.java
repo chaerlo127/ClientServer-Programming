@@ -52,13 +52,13 @@ public class CourseList {
 		return false;
 	}
 	
-	public boolean checkCourseWithSID(String sSID) {
+	public Course checkCourseWithSID(String sSID) {
 		for (int i = 0; i < this.vCourse.size(); i++) {
-			Course objCourse = (Course) this.vCourse.get(i);
-			if (objCourse.match(sSID)) {
-				return true;
+			Course course = (Course) this.vCourse.get(i);
+			if (course.match(sSID)) {
+				return course;
 			}
 		}
-		return false;
+		return null;
 	}
 }

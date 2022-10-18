@@ -93,7 +93,7 @@ public class Data extends UnicastRemoteObject implements DataIF{
 	}
 
 	@Override
-	public boolean checkCourse(String courseId) throws RemoteException {
+	public Course checkCourse(String courseId) throws RemoteException {
 		return courseList.checkCourseWithSID(courseId);
 	}
 

@@ -55,21 +55,38 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 		// course 정보가 같으면 에러
 		else return false;
 	}
+	
 	@Override
 	public boolean deleteCourse(String courseId) throws RemoteException {
 		if(data.deleteCourse(courseId)) return true;
 		else return false;
 	}
+	
 	@Override
 	public String addReservation(String reservationInfo) throws RemoteException, NullDataException {
+		System.out.println(reservationInfo);
 		Reservation reservation = new Reservation(reservationInfo);
 		Student studentInfo = data.checkStudent(reservation.studentId);
+		Course course = data.checkCourse(reservation.courseId);
 		if(studentInfo == null) return "존재하지 않은 학번입니다.";
+		if(course == null) return "존재하지 않는 강의 번호 입니다.";
 		
-		if(!data.checkCourse(reservation.courseId)) return "존재하지 않는 강의 번호 입니다.";
+		if(course.getPrecourseName().size()>0) {
+			int checkPrecourse = 0;
+			for(int i = 0 ; i<course.getPrecourseName().size() ; i++) {
+				for(int j = 0; j<studentInfo.getCompletedCourses().size(); j++) {
+					if(studentInfo.getCompletedCourses().get(j).equals(course.getPrecourseName().get(i))) {
+						checkPrecourse++;
+					}
+				}
+			}
+			if(checkPrecourse != course.getPrecourseName().size()) return "선 이수 과목을 수강하지 않았습니다.";
+		}
+	
 		if(data.addReservation(reservationInfo)) return "성공";
 		else return "실패";
 	}
+	
 	@Override
 	public boolean deleteReservation(String reservationId) throws RemoteException {
 		if(data.deleteReservation(reservationId)) return true;
@@ -86,7 +103,7 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	}
 	@Override
 	public boolean checkCourse(String courseId) throws RemoteException {
-		return data.checkCourse(courseId);
+		if(data.checkCourse(courseId) == null) return false;
+		else return true;
 	}
-
 }

@@ -15,5 +15,6 @@ public interface DataIF extends Remote{
 	boolean deleteReservation(String reservationId) throws RemoteException;
 	
 	Student checkStudent(String userId) throws RemoteException;
-	boolean checkCourse(String courseId) throws RemoteException;
+	Course checkCourse(String courseId) throws RemoteException;
+	
 }
