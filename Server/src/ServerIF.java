@@ -10,6 +10,9 @@ public interface ServerIF extends Remote{
 	boolean deleteStudent(String studentId) throws RemoteException;
 	boolean addCourse(String courseInfo) throws RemoteException, NullDataException;
 	boolean deleteCourse(String courseId) throws RemoteException;
-	boolean addReservation(String reservationInfo) throws RemoteException, NullDataException;
+	String addReservation(String reservationInfo) throws RemoteException, NullDataException;
 	boolean deleteReservation(String reservationId) throws RemoteException;
+	
+	boolean checkStudent(String userId) throws RemoteException;
+	boolean checkCourse(String courseId) throws RemoteException;
 }

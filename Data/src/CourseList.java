@@ -42,6 +42,16 @@ public class CourseList {
 		return false;
 	}
 	
+	public boolean checkPreCourseWithSID(String sSID) {
+		for (int i = 0; i < this.vCourse.size(); i++) {
+			Course course = (Course) this.vCourse.get(i);
+			if (course.match(sSID)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public boolean checkCourseWithSID(String sSID) {
 		for (int i = 0; i < this.vCourse.size(); i++) {
 			Course objCourse = (Course) this.vCourse.get(i);

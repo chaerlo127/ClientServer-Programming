@@ -13,9 +13,11 @@ public class Reservation implements Serializable{
     	this.studentId = stringTokenizer.nextToken();
     	this.courseId = stringTokenizer.nextToken();
     }
+    
     public boolean match(String studentId) {
         return this.studentId.equals(studentId);
     }
+    
     public String getStudentID() {
         return this.studentId;
     }
@@ -23,7 +25,6 @@ public class Reservation implements Serializable{
     public String getCourseID() {
     	return this.courseId;
     }
-    
     
     public String toString() {
         return this.studentId + "\t" + this.courseId;

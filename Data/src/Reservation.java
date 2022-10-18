@@ -24,7 +24,6 @@ public class Reservation implements Serializable{
     	return this.courseId;
     }
     
-    
     public String toString() {
         return this.studentId + "\t" + this.courseId;
     }

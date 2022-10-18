@@ -87,5 +87,15 @@ public class Data extends UnicastRemoteObject implements DataIF{
 		return reservationList.getAllReservation();
 	}
 
+	@Override
+	public Student checkStudent(String userId) throws RemoteException {
+		return studentList.isRegisteredStudent(userId);
+	}
+
+	@Override
+	public boolean checkCourse(String courseId) throws RemoteException {
+		return courseList.checkCourseWithSID(courseId);
+	}
+
 	
 }

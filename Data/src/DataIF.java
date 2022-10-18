@@ -12,4 +12,7 @@ public interface DataIF extends Remote{
 	boolean deleteCourse(String courseId) throws RemoteException;
 	boolean addReservation(String reservationInfo) throws RemoteException, NullDataException;
 	boolean deleteReservation(String reservationId) throws RemoteException;
+	
+	Student checkStudent(String userId) throws RemoteException;
+	boolean checkCourse(String courseId) throws RemoteException;
 }

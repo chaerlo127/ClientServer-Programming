@@ -46,8 +46,8 @@ public class Client {
 		System.out.print("Student ID: "); String studentId = objReader.readLine().trim();
 		System.out.print("Course ID: "); String courseId = objReader.readLine().trim();
 		
-		if(server.addReservation(studentId + " " + courseId)) System.out.println("SUCCESS");
-		else System.out.println("FAIL");
+		if(server.addReservation(studentId + " " + courseId) == "¼º°ø") System.out.println("SUCCESS");
+		else System.out.println(server.addReservation(studentId + " " + courseId));
 		
 	}
 

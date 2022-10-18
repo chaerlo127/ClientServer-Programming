@@ -42,13 +42,13 @@ public class StudentList {
 		return false;
 	}
 	
-	public boolean isRegisteredStudent(String sSID) {
+	public Student isRegisteredStudent(String sSID) {
 		for (int i = 0; i < this.vStudentList.size(); i++) {
 			Student student = (Student) this.vStudentList.get(i);
 			if (student.match(sSID)) {
-				return true;
+				return student;
 			}
 		}
-		return false;
+		return null;
 	}
 }
