@@ -7,4 +7,6 @@ public interface ServerIF extends Remote{
 	ArrayList<Course> getAllCourseList() throws RemoteException, NullDataException;
 	boolean addStudent(String studentInfo) throws RemoteException, NullDataException;
 	boolean deleteStudent(String studentId) throws RemoteException;
+	boolean addCourse(String courseInfo) throws RemoteException, NullDataException;
+	boolean deleteCourse(String courseId) throws RemoteException;
 }

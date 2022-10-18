@@ -21,9 +21,10 @@ public class Client {
 					case "1": showData(server.getAllStudentData()); break;
 					case "2": showData(server.getAllCourseList()); break;
 					case "3": addStudent(server, objReader); break;
-					case "4": /* add course */ 	break;
+					case "4": addCourse(server, objReader);	break;
 					case "5": deleteStudent(server, objReader);	break;
-					case "6": /* delete course */ break;
+					case "6": deleteCourse(server, objReader); break;
+					case "7": /* Make reservation(수강 신청: Student ID Course ID 넣고 저장): student 체크, courseId 체크, 선수 과목 체크 home work */ break;
 					case "0": return;
 					default: System.out.println("***********잘못입력했습니다. 다시 입력해주세요.***********"); break;
 				}
@@ -35,6 +36,17 @@ public class Client {
 		catch (IOException e) {	System.out.println("IOException: 파일을 읽어올 수 없습니다.");}
 		catch(NullDataException e) {System.out.println("NullDataException: 데이터에 값이 없습니다."); e.printStackTrace();}
 	}
+
+
+
+	private static void deleteCourse(ServerIF server, BufferedReader objReader) throws RemoteException, IOException {
+		/* delete course: home work */ 
+		System.out.print("Course ID: "); 
+		if(server.deleteCourse(objReader.readLine().trim())) System.out.println("SUCCESS");
+		else System.out.println("FAIL");
+	}
+
+
 
 	//throws RemoteException
 	private static void showData(ArrayList<?> dataList)  {
@@ -59,6 +71,18 @@ public class Client {
 	private static void deleteStudent(ServerIF server, BufferedReader objReader) throws RemoteException, IOException {
 		System.out.print("Student ID: "); 
 		if(server.deleteStudent(objReader.readLine().trim())) System.out.println("SUCCESS");
+		else System.out.println("FAIL");
+	}
+	
+	private static void addCourse(ServerIF server, BufferedReader objReader) throws IOException, RemoteException, NullDataException {
+		/* add course: home work */ 
+		System.out.println("----------- Course Information -----------"); 
+		System.out.print("Course ID: "); String courseId = objReader.readLine().trim();
+		System.out.print("Professor Name: "); String name = objReader.readLine().trim();
+		System.out.print("Course Name: "); String courseName = objReader.readLine().trim();
+		System.out.print("PreCourse Name List: "); String precourseNameList = objReader.readLine().trim();
+
+		if(server.addCourse(courseId + " " + name + " " + courseName + " " + precourseNameList)) System.out.println("SUCCESS");
 		else System.out.println("FAIL");
 	}
 

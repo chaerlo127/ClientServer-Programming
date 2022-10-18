@@ -25,14 +25,17 @@ public class Student implements Serializable{
     public boolean match(String studentId) {
         return this.studentId.equals(studentId);
     }
+    
     public String getName() {
         return this.name;
     }
+    
     public ArrayList<String> getCompletedCourses() {
         return this.vStudent;
     }
+    
     public String toString() {
-        String stringReturn = this.studentId + " " + this.name + " " + this.department;
+        String stringReturn = this.studentId + "\t" + this.name + "\t" + this.department + "\t";
         for (int i = 0; i < this.vStudent.size(); i++) {
             stringReturn = stringReturn + " " + this.vStudent.get(i).toString();
         }

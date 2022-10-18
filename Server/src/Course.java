@@ -15,6 +15,7 @@ public class Course implements Serializable{
         StringTokenizer stringTokenizer = new StringTokenizer(inputString);
     	this.courseId = stringTokenizer.nextToken();
     	this.name = stringTokenizer.nextToken();
+    	this.courseName = stringTokenizer.nextToken();
     	this.precourseNameList = new ArrayList<String>();
     	while (stringTokenizer.hasMoreTokens()) {
     		this.precourseNameList.add(stringTokenizer.nextToken());
@@ -34,9 +35,10 @@ public class Course implements Serializable{
     }
     
     public String toString() {
-        String stringReturn = this.courseId + " " + this.name + " " + this.courseName;
+    	System.out.println(this.courseName);
+        String stringReturn = this.courseId + "\t" + this.name + "\t" + this.courseName + "\t";
         for (int i = 0; i < this.precourseNameList.size(); i++) {
-            stringReturn = stringReturn + " " + this.precourseNameList.get(i).toString();
+            stringReturn = stringReturn +  " " + this.precourseNameList.get(i).toString();
         }
         return stringReturn;
     }

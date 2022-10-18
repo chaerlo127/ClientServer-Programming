@@ -35,6 +35,7 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	@Override
 	public boolean addStudent(String studentInfo) throws RemoteException, NullDataException {
 		if(data.addStudent(studentInfo)) return true;
+		// 학번이 같으면 에러
 		else return false;
 	}
 	
@@ -47,6 +48,17 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	@Override
 	public ArrayList<Course> getAllCourseList() throws RemoteException, NullDataException{
 		return data.getAllCourseList();
+	}
+	@Override
+	public boolean addCourse(String courseInfo) throws RemoteException, NullDataException {
+		if(data.addCourse(courseInfo)) return true;
+		// course 정보가 같으면 에러
+		else return false;
+	}
+	@Override
+	public boolean deleteCourse(String courseId) throws RemoteException {
+		if(data.deleteCourse(courseId)) return true;
+		else return false;
 	}
 
 }

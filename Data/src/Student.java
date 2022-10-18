@@ -15,6 +15,7 @@ public class Student implements Serializable{
         StringTokenizer stringTokenizer = new StringTokenizer(inputString);
     	this.studentId = stringTokenizer.nextToken();
     	this.name = stringTokenizer.nextToken();
+    	this.name += " " + stringTokenizer.nextToken();
     	this.department = stringTokenizer.nextToken();
     	this.vStudent = new ArrayList<String>();
     	while (stringTokenizer.hasMoreTokens()) {
@@ -35,7 +36,7 @@ public class Student implements Serializable{
     }
     
     public String toString() {
-        String stringReturn = this.studentId + " " + this.name + " " + this.department;
+        String stringReturn = this.studentId + "\t" + this.name + "\t" + this.department + "\t";
         for (int i = 0; i < this.vStudent.size(); i++) {
             stringReturn = stringReturn + " " + this.vStudent.get(i).toString();
         }
