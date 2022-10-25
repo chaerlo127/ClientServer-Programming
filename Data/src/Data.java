@@ -101,4 +101,9 @@ public class Data extends UnicastRemoteObject implements DataIF{
 	public Student checkLogin(String userId, String password) throws RemoteException {
 		return studentList.checkStudent(userId, password);
 	}
+
+	@Override
+	public boolean signUP(String studentNum, String password, String name, String major) throws RemoteException, NullDataException {
+		return studentList.addStudentRecords(studentNum + " " + password + " " + name + " " + major);
+	}
 }

@@ -112,4 +112,12 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 		if(data.checkLogin(studentNum, password) != null) return true;
 		else return false;
 	}
+	@Override
+	public boolean signUP(String studentNum, String password, String name, String major) throws RemoteException {
+		if(studentNum.equals(null) || password.equals(null) || name.equals(null) || major.equals(null)) return false;
+		if(data.checkStudent(studentNum) != null) return false;
+		
+		if(data.signUP(studentNum, password, name, major)) return true;
+		return false;
+	}
 }

@@ -25,7 +25,7 @@ public class StudentList {
 		return this.vStudentList;
 	}
 	
-	public boolean addStudentRecords(String studentInfo) throws NullDataException { // student로 해도 됨. 어려움. 예외 사항 발생
+	public boolean addStudentRecords(String studentInfo) throws NullDataException {
 		if(studentInfo == null) throw new NullDataException("-------------- studentInfo data is null --------------");
 		if(this.vStudentList.add(new Student(studentInfo))) return true;
 		else return false;

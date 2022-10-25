@@ -65,7 +65,9 @@ public class Client {
 		System.out.println("----------- signUP Information -----------"); 
 		System.out.print("학번:"); String studentNum = objReader.readLine().trim();
 		System.out.print("비밀번호:"); String password = objReader.readLine().trim();
-		return true;
+		System.out.print("이름:"); String name = objReader.readLine().trim();
+		System.out.print("전공:"); String major = objReader.readLine().trim();
+		return server.signUP(studentNum, password, name, major);
 	}
 
 	private static void makeReservation(ServerIF server, BufferedReader objReader) throws IOException, RemoteException, NullDataException {
@@ -79,8 +81,6 @@ public class Client {
 		else System.out.println(answer);
 		
 	}
-
-
 
 	private static void deleteCourse(ServerIF server, BufferedReader objReader) throws RemoteException, IOException {
 		/* delete course: home work */ 

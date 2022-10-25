@@ -16,5 +16,6 @@ public interface ServerIF extends Remote{
 	boolean checkStudent(String userId) throws RemoteException;
 	boolean checkCourse(String courseId) throws RemoteException;
 	
-	boolean login(String studentNum, String password);
+	boolean login(String studentNum, String password) throws RemoteException;
+	boolean signUP(String studentNum, String password, String name, String major) throws RemoteException;
 }
