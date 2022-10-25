@@ -25,8 +25,8 @@ public class Data extends UnicastRemoteObject implements DataIF{
 			Data data = new Data();
 			Naming.bind("Data", data);
 			System.out.println("Data is ready !!!");
-			studentList = new StudentList(path + "\\Students.txt");
-			courseList = new CourseList(path + "\\Courses.txt");
+			studentList = new StudentList(path + "\\data\\Students.txt");
+			courseList = new CourseList(path + "\\data\\Courses.txt");
 			reservationList = new ReservationList();
 		} 
 		catch (MalformedURLException e) {System.out.println("MalformedURLException: rmiRegistry를 찾을 수 없습니다.");} 

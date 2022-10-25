@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public interface ServerIF extends Remote{
 	ArrayList<Student> getAllStudentData() throws RemoteException, NullDataException;
 	ArrayList<Course> getAllCourseList() throws RemoteException, NullDataException;
-	ArrayList<Reservation> getAllReservationList() throws RemoteException, NullDataException;
+	ArrayList<Reservation> getAllReservationList() throws RemoteException;
 	boolean addStudent(String studentInfo) throws RemoteException, NullDataException;
 	boolean deleteStudent(String studentId) throws RemoteException;
 	boolean addCourse(String courseInfo) throws RemoteException, NullDataException;
@@ -15,4 +15,6 @@ public interface ServerIF extends Remote{
 	
 	boolean checkStudent(String userId) throws RemoteException;
 	boolean checkCourse(String courseId) throws RemoteException;
+	
+	boolean login(String studentNum, String password) throws RemoteException;
 }

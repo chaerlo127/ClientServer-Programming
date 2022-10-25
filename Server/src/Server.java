@@ -52,8 +52,7 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	@Override
 	public boolean addCourse(String courseInfo) throws RemoteException, NullDataException {
 		if(data.addCourse(courseInfo)) return true;
-		// course 정보가 같으면 에러
-		else return false;
+		else return false; // course 정보가 같으면 에러
 	}
 	
 	@Override
@@ -93,7 +92,7 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 		else return false;
 	}
 	@Override
-	public ArrayList<Reservation> getAllReservationList() throws RemoteException, NullDataException {
+	public ArrayList<Reservation> getAllReservationList() throws RemoteException {
 		return data.getAllReservationList();
 	}
 	@Override
@@ -105,5 +104,12 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	public boolean checkCourse(String courseId) throws RemoteException {
 		if(data.checkCourse(courseId) == null) return false;
 		else return true;
+	}
+	@Override
+	public boolean login(String studentNum, String password) throws RemoteException {
+		if(studentNum.equals(null) || password.equals(null)) return false;
+		
+		if(data.checkStudent(studentNum) != null) return true;
+		else return false;
 	}
 }

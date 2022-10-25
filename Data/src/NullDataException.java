@@ -3,6 +3,7 @@ public class NullDataException extends Exception{
 	private static final long serialVersionUID = 1L;
 
 	public NullDataException(String errorMessage) {
-		super(errorMessage);
+		System.out.println("안에 값이 없습니다.");
+//		super(errorMessage);
 	}
 }

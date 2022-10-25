@@ -9,7 +9,6 @@ public class ReservationList {
 	}
 
 	public ArrayList<Reservation> getAllReservation() throws NullDataException{
-		if(this.vReservList.size() == 0) throw new NullDataException("-------------- Student data is null --------------");
 		return this.vReservList;
 	}
 	
