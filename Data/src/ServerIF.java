@@ -13,6 +13,7 @@ public interface ServerIF extends Remote{
 	String addReservation(String reservationInfo) throws RemoteException, NullDataException;
 	boolean deleteReservation(String reservationId) throws RemoteException;
 
+	boolean login(String userId, String password) throws RemoteException;
 	boolean checkStudent(String userId) throws RemoteException;
 	boolean checkCourse(String courseId) throws RemoteException;
 }

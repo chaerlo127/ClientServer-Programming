@@ -51,4 +51,14 @@ public class StudentList {
 		}
 		return null;
 	}
+	
+	public Student checkStudent(String sSID, String password) {
+		for (int i = 0; i < this.vStudentList.size(); i++) {
+			Student student = (Student) this.vStudentList.get(i);
+			if (student.match(sSID) && student.matchpw(password)) {
+				return student;
+			}
+		}
+		return null;
+	}
 }

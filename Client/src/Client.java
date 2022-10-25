@@ -62,7 +62,7 @@ public class Client {
 	}
 
 	private static boolean signUP(ServerIF server, BufferedReader objReader) throws IOException {
-		System.out.println("----------- Login Information -----------"); 
+		System.out.println("----------- signUP Information -----------"); 
 		System.out.print("학번:"); String studentNum = objReader.readLine().trim();
 		System.out.print("비밀번호:"); String password = objReader.readLine().trim();
 		return true;

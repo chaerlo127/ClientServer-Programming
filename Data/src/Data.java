@@ -97,5 +97,8 @@ public class Data extends UnicastRemoteObject implements DataIF{
 		return courseList.checkCourseWithSID(courseId);
 	}
 
-	
+	@Override
+	public Student checkLogin(String userId, String password) throws RemoteException {
+		return studentList.checkStudent(userId, password);
+	}
 }

@@ -15,4 +15,5 @@ public interface DataIF extends Remote{
 	
 	Student checkStudent(String userId) throws RemoteException;
 	Course checkCourse(String courseId) throws RemoteException;
+	Student checkLogin(String userId, String password) throws RemoteException;
 }
