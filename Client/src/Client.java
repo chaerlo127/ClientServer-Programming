@@ -104,11 +104,12 @@ public class Client {
 	private static void addStudent(ServerIF server, BufferedReader objReader) throws RemoteException, IOException, NullDataException{
 		System.out.println("----------- Student Information -----------"); 
 		System.out.print("Student ID: "); String studentId = objReader.readLine().trim();
+		System.out.print("Student password: "); String password = objReader.readLine().trim();
 		System.out.print("Student Name: "); String studentName = objReader.readLine().trim();
 		System.out.print("Student Department: "); String studentDept = objReader.readLine().trim();
 		System.out.print("Student Completed Course: "); String completedCourse = objReader.readLine().trim();
 		
-		if(server.addStudent(studentId + " " + studentName + " " + studentDept + " " + completedCourse)) System.out.println("SUCCESS");
+		if(server.addStudent(studentId + " " + password+ " " + studentName + " " + studentDept + " " + completedCourse)) System.out.println("SUCCESS");
 		else System.out.println("FAIL");
 	}
 	

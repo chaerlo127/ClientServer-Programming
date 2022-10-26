@@ -8,13 +8,16 @@ public class Student implements Serializable{
 	protected String studentId;
     protected String name;
     protected String department;
+    protected String password;
     protected ArrayList<String> vStudent;
 
     // 여러 정보들을 자바의 class 형태로 : Entity Class, Value Object
     public Student(String inputString) {
         StringTokenizer stringTokenizer = new StringTokenizer(inputString);
     	this.studentId = stringTokenizer.nextToken();
+    	this.password = stringTokenizer.nextToken();
     	this.name = stringTokenizer.nextToken();
+    	this.name += " " + stringTokenizer.nextToken();
     	this.department = stringTokenizer.nextToken();
     	this.vStudent = new ArrayList<String>();
     	while (stringTokenizer.hasMoreTokens()) {
@@ -24,6 +27,10 @@ public class Student implements Serializable{
     
     public boolean match(String studentId) {
         return this.studentId.equals(studentId);
+    }
+    
+    public boolean matchpw(String password) {
+        return this.password.equals(password);
     }
     
     public String getName() {

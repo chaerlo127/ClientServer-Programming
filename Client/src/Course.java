@@ -26,6 +26,14 @@ public class Course implements Serializable{
         return this.courseId.equals(courseId);
     }
     
+    public boolean matchPreCourse(String courseId) {
+    	for(int i = 0; i<this.precourseNameList.size(); i++) {
+    		this.precourseNameList.get(i).equals(courseId);
+    		return true;
+    	}
+        return false;
+    }
+    
     public String getName() {
         return this.name;
     }
@@ -35,7 +43,6 @@ public class Course implements Serializable{
     }
     
     public String toString() {
-    	System.out.println(this.courseName);
         String stringReturn = this.courseId + "\t" + this.name + "\t" + this.courseName + "\t";
         for (int i = 0; i < this.precourseNameList.size(); i++) {
             stringReturn = stringReturn +  " " + this.precourseNameList.get(i).toString();
