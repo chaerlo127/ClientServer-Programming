@@ -70,6 +70,10 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 		if(studentInfo == null) return "존재하지 않은 학번입니다.";
 		if(course == null) return "존재하지 않는 강의 번호 입니다.";
 		
+		for(int i = 0; i<studentInfo.vStudent.size(); i++) {
+			if(course.courseId.equals(studentInfo.vStudent.get(i))) return "이미 수강한 과목입니다.";
+		}
+		
 		if(course.getPrecourseName().size()>0) {
 			int checkPrecourse = 0;
 			for(int i = 0 ; i<course.getPrecourseName().size() ; i++) {
