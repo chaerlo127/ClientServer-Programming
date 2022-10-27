@@ -19,31 +19,11 @@ public class Client {
 				boolean checkLogin = false;
 				showInitialView();
 				userConsoleInput = objReader.readLine().trim();
-				switch(userConsoleInput) {
-				case "1": checkLogin = login(server, objReader); break;
-				case "2": checkLogin = signUP(server, objReader); break;
-				case "0": return; 
-				default: System.out.println("***********잘못입력했습니다. 다시 입력해주세요.***********"); break;
-				}
+				checkLogin = userChecked(server, objReader, userConsoleInput, checkLogin);
 				
-				if(checkLogin) {
-				while(!userConsoleInput.equals("99")) {
-					showMenu();
-					userConsoleInput = objReader.readLine().trim();
-					switch(userConsoleInput) {
-					case "1": showData(server.getAllStudentData()); break;
-					case "2": showData(server.getAllCourseList()); break;
-					case "3": addStudent(server, objReader); break;
-					case "4": addCourse(server, objReader);	break;
-					case "5": deleteStudent(server, objReader);	break;
-					case "6": deleteCourse(server, objReader); break;
-					case "7": makeReservation(server, objReader); break;
-					case "8": showData(server.getAllReservationList()); break;
-					case "99": break;
-					default: System.out.println("***********잘못입력했습니다. 다시 입력해주세요.***********"); break;
-					}
-				}
-			}else System.out.println("***********잘못입력했습니다. 다시 입력해주세요.***********"); 
+				if (checkLogin) {
+					while (!userConsoleInput.equals("99")) {userConsoleInput = registerCourseMenu(server, objReader);}
+				} else System.out.println("***********잘못입력했습니다. 다시 입력해주세요.***********"); 
 				checkLogin = false;
 			}
 		} 
@@ -54,11 +34,43 @@ public class Client {
 		catch(NullDataException e) {System.out.println("NullDataException: 데이터에 값이 없습니다."); e.printStackTrace();}
 	}
 
+	private static boolean userChecked(ServerIF server, BufferedReader objReader, String userConsoleInput, boolean checkLogin) throws IOException {
+		switch(userConsoleInput) {
+		case "1": checkLogin = login(server, objReader); break;
+		case "2": checkLogin = signUP(server, objReader); break;
+		case "0": System.exit(0);;; 
+		default: System.out.println("***********잘못입력했습니다. 다시 입력해주세요.***********"); break;
+		}
+		return checkLogin;
+	}
+	
+	private static String registerCourseMenu(ServerIF server, BufferedReader objReader)
+			throws IOException, RemoteException, NullDataException {
+		String userConsoleInput;
+		showMenu();
+		userConsoleInput = objReader.readLine().trim();
+		switch(userConsoleInput) {
+		case "1": showData(server.getAllStudentData()); break;
+		case "2": showData(server.getAllCourseList()); break;
+		case "3": addStudent(server, objReader); break;
+		case "4": addCourse(server, objReader);	break;
+		case "5": deleteStudent(server, objReader);	break;
+		case "6": deleteCourse(server, objReader); break;
+		case "7": makeReservation(server, objReader); break;
+		case "8": showData(server.getAllReservationList()); break;
+		case "99": break;
+		default: System.out.println("***********잘못입력했습니다. 다시 입력해주세요.***********"); break;
+		}
+		return userConsoleInput;
+	}
+
 	private static boolean login(ServerIF server, BufferedReader objReader) throws IOException {
 		System.out.println("----------- Login Information -----------"); 
 		System.out.print("학번:"); String studentNum = objReader.readLine().trim();
 		System.out.print("비밀번호:"); String password = objReader.readLine().trim();
-		return server.login(studentNum, password);
+		System.out.println(server.login(studentNum, password));
+		
+		return server.login(studentNum, password).contains("성공") ? true: false;
 	}
 
 	private static boolean signUP(ServerIF server, BufferedReader objReader) throws IOException {
@@ -67,7 +79,9 @@ public class Client {
 		System.out.print("비밀번호:"); String password = objReader.readLine().trim();
 		System.out.print("이름:"); String name = objReader.readLine().trim();
 		System.out.print("전공:"); String major = objReader.readLine().trim();
-		return server.signUP(studentNum, password, name, major);
+		System.out.println(server.signUP(studentNum, password, name, major));
+		
+		return server.signUP(studentNum, password, name, major).contains("성공") ? true:false;
 	}
 
 	private static void makeReservation(ServerIF server, BufferedReader objReader) throws IOException, RemoteException, NullDataException {
@@ -83,13 +97,9 @@ public class Client {
 	}
 
 	private static void deleteCourse(ServerIF server, BufferedReader objReader) throws RemoteException, IOException {
-		/* delete course: home work */ 
 		System.out.print("Course ID: "); 
-		if(server.deleteCourse(objReader.readLine().trim())) System.out.println("SUCCESS");
-		else System.out.println("FAIL");
+		System.out.println(server.deleteCourse(objReader.readLine().trim()));
 	}
-
-
 
 	// throws RemoteException
 	private static void showData(ArrayList<?> dataList) {
@@ -109,14 +119,12 @@ public class Client {
 		System.out.print("Student Department: "); String studentDept = objReader.readLine().trim();
 		System.out.print("Student Completed Course: "); String completedCourse = objReader.readLine().trim();
 		
-		if(server.addStudent(studentId + " " + password+ " " + studentName + " " + studentDept + " " + completedCourse)) System.out.println("SUCCESS");
-		else System.out.println("FAIL");
+		System.out.println(server.addStudent(studentId + " " + password+ " " + studentName + " " + studentDept + " " + completedCourse));
 	}
 	
 	private static void deleteStudent(ServerIF server, BufferedReader objReader) throws RemoteException, IOException {
 		System.out.print("Student ID: "); 
-		if(server.deleteStudent(objReader.readLine().trim())) System.out.println("SUCCESS");
-		else System.out.println("FAIL");
+		System.out.println(server.deleteStudent(objReader.readLine().trim()));
 	}
 	
 	private static void addCourse(ServerIF server, BufferedReader objReader) throws IOException, RemoteException, NullDataException {
@@ -127,8 +135,7 @@ public class Client {
 		System.out.print("Course Name: "); String courseName = objReader.readLine().trim();
 		System.out.print("PreCourse Name List: "); String precourseNameList = objReader.readLine().trim();
 
-		if(server.addCourse(courseId + " " + name + " " + courseName + " " + precourseNameList)) System.out.println("SUCCESS");
-		else System.out.println("FAIL");
+		System.out.println(server.addCourse(courseId + " " + name + " " + courseName + " " + precourseNameList));
 	}
 
 	private static void showMenu() {
