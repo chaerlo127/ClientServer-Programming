@@ -13,11 +13,11 @@ public class Reservation implements Serializable{
     	this.studentId = stringTokenizer.nextToken();
     	this.courseId = stringTokenizer.nextToken();
     }
-    public boolean match(String studentId, String courseId) {
-        return this.studentId.equals(studentId) && this.courseId.equals(courseId);
+    public boolean match(String studentId) {
+        return this.studentId.equals(studentId);
     }
-	public boolean matchStudent(String studentId) {
-		return this.studentId.equals(studentId);
+	public boolean matchCourse(String courseId) {
+		return this.courseId.equals(courseId);
 	}
     public String getStudentID() {
         return this.studentId;
