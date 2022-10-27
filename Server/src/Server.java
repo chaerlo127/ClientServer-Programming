@@ -64,16 +64,18 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	@Override
 	public String addReservation(String reservationInfo) throws RemoteException, NullDataException {
 		System.out.println(reservationInfo);
+		if(reservationInfo.equals(" ")) return new StringReturn(StringReturnException.HAVE_NOT_VALUE).getErrorMessage();
 		Reservation reservation = new Reservation(reservationInfo);
 		Student studentInfo = data.checkStudent(reservation.studentId);
 		Course course = data.checkCourse(reservation.courseId);
-		if(studentInfo == null) return "존재하지 않은 학번입니다.";
-		if(course == null) return "존재하지 않는 강의 번호 입니다.";
+		if(studentInfo == null) return new StringReturn(StringReturnException.HAVE_NOT_STUDENT).getErrorMessage();
+		if(course == null) return new StringReturn(StringReturnException.HAVE_NOT_COURSE).getErrorMessage();
 		
 		for(int i = 0; i<studentInfo.vStudent.size(); i++) {
-			if(course.courseId.equals(studentInfo.vStudent.get(i))) return "이미 수강한 과목입니다.";
+			if(course.courseId.equals(studentInfo.vStudent.get(i))) return new StringReturn(StringReturnException.ALREADY_REGISTERED_COURSE).getErrorMessage();
 		}
 		
+		// 변경이 필요하다.
 		if(course.getPrecourseName().size()>0) {
 			int checkPrecourse = 0;
 			for(int i = 0 ; i<course.getPrecourseName().size() ; i++) {
@@ -83,11 +85,11 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 					}
 				}
 			}
-			if(checkPrecourse != course.getPrecourseName().size()) return "선 이수 과목을 수강하지 않았습니다.";
+			if(checkPrecourse != course.getPrecourseName().size()) return new StringReturn(StringReturnException.NOT_REGISTERED_PRECOURSE).getErrorMessage();;
 		}
 	
-		if(data.addReservation(reservationInfo)) return "성공";
-		else return "실패";
+		if(data.addReservation(reservationInfo)) return new StringReturn(StringReturnException.SUCCESS).getErrorMessage();
+		else return new StringReturn(StringReturnException.FAIL).getErrorMessage();
 	}
 	
 	@Override
