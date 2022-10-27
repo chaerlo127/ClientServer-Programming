@@ -11,7 +11,8 @@ public enum StringReturnException {
 	NOT_ADD_COURSE(208, "강좌가 등록되지 않았습니다."),
 	NOT_DELETED_STUDENT(209, "학생이 삭제되지 않았습니다."),
 	NOT_DELETED_RESERVATION(210, "수강신청이 삭제되지 않았습니다."),
-	HAVE_STUDENT(211, "이미 학생 정보가 저장되어 있습니다.");
+	HAVE_STUDENT(211, "이미 학생 정보가 저장되어 있습니다."),
+	HAVE_COURSE(212, "이미 등록된 과목 번호 입니다.");
 	
 	private final String message;
 	private final int code;

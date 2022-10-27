@@ -29,10 +29,10 @@ public class ReservationList {
 		return false;
 	}
 	
-	public boolean isRegisteredStudent(String sSID) {
+	public boolean isRegisteredStudent(String studentId, String courseId) {
 		for (int i = 0; i < this.vReservList.size(); i++) {
 			Reservation reservation = (Reservation) this.vReservList.get(i);
-			if (reservation.match(sSID)) {
+			if (reservation.match(studentId)&& reservation.matchCourse(courseId)) {
 				return true;
 			}
 		}

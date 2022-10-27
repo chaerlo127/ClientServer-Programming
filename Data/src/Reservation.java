@@ -16,6 +16,9 @@ public class Reservation implements Serializable{
     public boolean match(String studentId) {
         return this.studentId.equals(studentId);
     }
+	public boolean matchCourse(String courseId) {
+		return this.courseId.equals(courseId);
+	}
     public String getStudentID() {
         return this.studentId;
     }
@@ -27,4 +30,5 @@ public class Reservation implements Serializable{
     public String toString() {
         return "학번: " + this.studentId + "\t" + "과목 코드: " + this.courseId;
     }
+
 }

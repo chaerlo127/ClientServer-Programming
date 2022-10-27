@@ -38,7 +38,7 @@ public class Course implements Serializable{
         return this.name;
     }
     
-    public ArrayList<String> getPrecourseName() {
+    public ArrayList<String> getPrecourseList() {
         return this.precourseNameList;
     }
     

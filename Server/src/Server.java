@@ -10,6 +10,7 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	private static final long serialVersionUID = 1L;
 	private static DataIF data;
 	String name;
+	
 	protected Server() throws RemoteException {
 		super();
 	}
@@ -48,11 +49,12 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	public ArrayList<Course> getAllCourseList() throws RemoteException, NullDataException{
 		return data.getAllCourseList();
 	}
+	
 	@Override
 	public String addCourse(String courseInfo) throws RemoteException, NullDataException {
+		if(data.checkCourse(courseInfo) != null) return new StringReturn(StringReturnException.HAVE_COURSE).getErrorMessage();
 		if(data.addCourse(courseInfo)) return new StringReturn(StringReturnException.SUCCESS).getErrorMessage();
 		else return new StringReturn(StringReturnException.NOT_ADD_COURSE).getErrorMessage();
-		// course 정보가 같으면 에러
 	}
 	
 	@Override
@@ -75,21 +77,24 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 		
 		for(int i = 0; i<studentInfo.vStudent.size(); i++) {if(course.courseId.equals(studentInfo.vStudent.get(i))) return new StringReturn(StringReturnException.ALREADY_REGISTERED_COURSE).getErrorMessage();}
 		
-		// 변경이 필요하다.
-		if(course.getPrecourseName().size()>0) {
-			int checkPrecourse = 0;
-			for(int i = 0 ; i<course.getPrecourseName().size() ; i++) {
-				for(int j = 0; j<studentInfo.getCompletedCourses().size(); j++) {
-					if(studentInfo.getCompletedCourses().get(j).equals(course.getPrecourseName().get(i))) {
-						checkPrecourse++;
-					}
-				}
-			}
-			if(checkPrecourse != course.getPrecourseName().size()) return new StringReturn(StringReturnException.NOT_REGISTERED_PRECOURSE).getErrorMessage();;
-		}
+		if(checkPrecourse(studentInfo, course) != course.getPrecourseList().size()) return new StringReturn(StringReturnException.NOT_REGISTERED_PRECOURSE).getErrorMessage();;
 	
+		// 이미 수강신청을 한 경우
+		if(data.checkReservation(reservation)) return new StringReturn(StringReturnException.ALREADY_REGISTERED_COURSE).getErrorMessage();
 		if(data.addReservation(reservationInfo)) return new StringReturn(StringReturnException.SUCCESS).getErrorMessage();
 		else return new StringReturn(StringReturnException.FAIL).getErrorMessage();
+	}
+
+	private int checkPrecourse(Student studentInfo, Course course) {
+		int checkPrecourse = 0;
+		for(int i = 0 ; i<course.getPrecourseList().size() ; i++) {
+			for(int j = 0; j<studentInfo.getCompletedCourses().size(); j++) {
+				if(studentInfo.getCompletedCourses().get(j).equals(course.getPrecourseList().get(i))) {
+					checkPrecourse++;
+				}
+			}
+		}
+		return checkPrecourse;
 	}
 	
 	@Override
