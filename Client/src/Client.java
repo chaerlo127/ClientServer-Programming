@@ -6,13 +6,22 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Client {
+	private final static Logger LOG = Logger.getGlobal();
 	public static void main(String[] args) {
+		
 		ServerIF server;
 		BufferedReader objReader = new BufferedReader(new InputStreamReader(System.in));
 		String userConsoleInput = "";
 		try {
+			logConfigurationMethod();
+			
 			while (!userConsoleInput.equals("0")) {
 				server = (ServerIF) Naming.lookup("Server");
 				
@@ -20,7 +29,6 @@ public class Client {
 				showInitialView();
 				userConsoleInput = objReader.readLine().trim();
 				checkLogin = userChecked(server, objReader, userConsoleInput, checkLogin);
-				
 				if (checkLogin) {
 					while (!userConsoleInput.equals("99")) {userConsoleInput = registerCourseMenu(server, objReader);}
 				} else System.out.println("***********잘못입력했습니다. 다시 입력해주세요.***********"); 
@@ -32,6 +40,20 @@ public class Client {
 		catch (NotBoundException e) {System.out.println("NotBoundException: 이미 rmiRegistry에 연결할 Data가 없습니다.");}
 		catch (IOException e) {	System.out.println("IOException: 파일을 읽어올 수 없습니다.");}
 		catch(NullDataException e) {System.out.println("NullDataException: 데이터에 값이 없습니다."); e.printStackTrace();}
+	}
+
+	private static void logConfigurationMethod() throws IOException {
+		Logger logger = Logger.getLogger("");
+		Handler[] handlers = logger.getHandlers();
+		if (handlers[0] instanceof ConsoleHandler) {
+			logger.removeHandler(handlers[0]);
+		}
+		
+		LOG.setLevel(Level.INFO);
+		Handler fileHandler = new FileHandler("client.log", true);
+		LogFormat formatter = new LogFormat();
+		fileHandler.setFormatter(formatter);
+		LOG.addHandler(fileHandler);
 	}
 
 	private static boolean userChecked(ServerIF server, BufferedReader objReader, String userConsoleInput, boolean checkLogin) throws IOException {
