@@ -31,7 +31,7 @@ public class Client {
 				checkLogin = userChecked(server, objReader, userConsoleInput);
 				if (checkLogin != null) {
 					logUser = checkLogin;
-					server.sendSeverStudentForLog(logUser);
+					server.sendSeverStudentForLog(checkLogin);
 					while (!userConsoleInput.equals("99")) {userConsoleInput = registerCourseMenu(server, objReader);}
 				} else System.out.println("***********잘못입력했습니다. 다시 입력해주세요.***********"); 
 				checkLogin = null;
@@ -48,9 +48,7 @@ public class Client {
 	private static void logConfigurationMethod() throws IOException {
 		Logger logger = Logger.getLogger("");
 		Handler[] handlers = logger.getHandlers();
-		if (handlers[0] instanceof ConsoleHandler) {
-			logger.removeHandler(handlers[0]);
-		}
+		if (handlers[0] instanceof ConsoleHandler) logger.removeHandler(handlers[0]);
 		
 		LOG.setLevel(Level.INFO);
 		Handler fileHandler = new FileHandler("client.log", true);
@@ -67,7 +65,6 @@ public class Client {
 		case "0": System.exit(0);
 		default: System.out.println("***********잘못입력했습니다***********"); break;
 		}
-		System.out.println(checkLogin);
 		return checkLogin;
 	}
 	

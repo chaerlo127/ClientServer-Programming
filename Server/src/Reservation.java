@@ -9,11 +9,10 @@ public class Reservation implements Serializable{
 	protected String courseId;
 
     // 여러 정보들을 자바의 class 형태로 : Entity Class, Value Object
-    public Reservation(String inputString, Logger log, String logUser) {
+    public Reservation(String inputString) {
         StringTokenizer stringTokenizer = new StringTokenizer(inputString);
     	this.studentId = stringTokenizer.nextToken();
     	this.courseId = stringTokenizer.nextToken();
-    	log.info(logUser);
     }
     public boolean match(String studentId) {
         return this.studentId.equals(studentId);

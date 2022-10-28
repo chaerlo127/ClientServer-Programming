@@ -17,7 +17,7 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	private final static Logger LOG = Logger.getGlobal();
 	private static DataIF data;
 	String name;
-	private static String logUser;
+	String logUser;
 	
 	protected Server() throws RemoteException {
 		super();
@@ -40,7 +40,7 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	private static void logConfigurationMethod() throws IOException {
 		Logger logger = Logger.getLogger("");
 		Handler[] handlers = logger.getHandlers();
-		if (handlers[0] instanceof ConsoleHandler) {logger.removeHandler(handlers[0]);}
+		if (handlers[0] instanceof ConsoleHandler) logger.removeHandler(handlers[0]);
 		
 		LOG.setLevel(Level.INFO);
 		Handler fileHandler = new FileHandler("server.log", true);
@@ -51,13 +51,11 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	
 	@Override
 	public ArrayList<Student> getAllStudentData() throws RemoteException, NullDataException{
-		LOG.info(logUser);
 		return data.getAllStudentData();
 	}
 	
 	@Override
 	public String addStudent(String studentInfo) throws RemoteException, NullDataException {
-		LOG.info(logUser);
 		if(data.addStudent(studentInfo)) return new StringReturn(StringReturnException.SUCCESS).getErrorMessage();
 		// 학번이 같으면 에러
 		else return new StringReturn(StringReturnException.NOT_ADD_STUDENT).getErrorMessage();
@@ -65,20 +63,17 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	
 	@Override
 	public String deleteStudent(String studentId) throws RemoteException { // exception이 있다면 여기서 해야함. 
-		LOG.info(logUser);
 		if(data.deleteStudent(studentId)) return new StringReturn(StringReturnException.SUCCESS).getErrorMessage();
 		else return new StringReturn(StringReturnException.NOT_DELETED_STUDENT).getErrorMessage();
 	}
 	
 	@Override
 	public ArrayList<Course> getAllCourseList() throws RemoteException, NullDataException{
-		LOG.info(logUser);
 		return data.getAllCourseList();
 	}
 	
 	@Override
 	public String addCourse(String courseInfo) throws RemoteException, NullDataException {
-		LOG.info(logUser);
 		if(data.checkCourse(courseInfo) != null) return new StringReturn(StringReturnException.HAVE_COURSE).getErrorMessage();
 		if(data.addCourse(courseInfo)) return new StringReturn(StringReturnException.SUCCESS).getErrorMessage();
 		else return new StringReturn(StringReturnException.NOT_ADD_COURSE).getErrorMessage();
@@ -86,18 +81,16 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	
 	@Override
 	public String deleteCourse(String courseId) throws RemoteException {
-		LOG.info(logUser);
 		if(data.deleteCourse(courseId)) return new StringReturn(StringReturnException.SUCCESS).getErrorMessage();
 		else return new StringReturn(StringReturnException.NOT_ADD_COURSE).getErrorMessage();
 	}
 	
 	@Override
 	public String addReservation(String reservationInfo) throws RemoteException, NullDataException {
-		LOG.info(logUser);
 		System.out.println(reservationInfo);
 		if(reservationInfo.equals(" ")) return new StringReturn(StringReturnException.HAVE_NOT_VALUE).getErrorMessage();
 		
-		Reservation reservation = new Reservation(reservationInfo, LOG, logUser);
+		Reservation reservation = new Reservation(reservationInfo);
 		Student studentInfo = data.checkStudent(reservation.studentId);
 		Course course = data.checkCourse(reservation.courseId);
 		
@@ -115,7 +108,6 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	}
 
 	private int checkPrecourse(Student studentInfo, Course course) {
-		LOG.info(logUser);
 		int checkPrecourse = 0;
 		for(int i = 0 ; i<course.getPrecourseList().size() ; i++) {
 			for(int j = 0; j<studentInfo.getCompletedCourses().size(); j++) {
@@ -127,43 +119,36 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	
 	@Override
 	public String deleteReservation(String reservationId) throws RemoteException {
-		LOG.info(logUser);
 		if(data.deleteReservation(reservationId)) return new StringReturn(StringReturnException.SUCCESS).getErrorMessage();
 		else return new StringReturn(StringReturnException.NOT_DELETED_RESERVATION).getErrorMessage();
 	}
 	
 	@Override
 	public ArrayList<Reservation> getAllReservationList() throws RemoteException {
-		LOG.info(logUser);
 		return data.getAllReservationList();
 	}
 	
 	@Override
 	public String checkStudent(String userId) throws RemoteException {
-		LOG.info(logUser);
 		if(data.checkStudent(userId) == null) return new StringReturn(StringReturnException.SUCCESS).getErrorMessage();
 		else return new StringReturn(StringReturnException.HAVE_NOT_STUDENT).getErrorMessage();
 	}
 	
 	@Override
 	public String checkCourse(String courseId) throws RemoteException {
-		LOG.info(logUser);
 		if(data.checkCourse(courseId) == null) return new StringReturn(StringReturnException.SUCCESS).getErrorMessage();
 		else return new StringReturn(StringReturnException.HAVE_NOT_COURSE).getErrorMessage();
 	}
 	
 	@Override
 	public String login(String studentNum, String password) throws RemoteException {
-		LOG.info(logUser);
 		if(studentNum.equals(null) || password.equals(null)) return new StringReturn(StringReturnException.HAVE_NOT_VALUE).getErrorMessage();
-		
 		if(data.checkLogin(studentNum, password) != null) return new StringReturn(StringReturnException.SUCCESS).getErrorMessage();
 		else return new StringReturn(StringReturnException.FAIL).getErrorMessage();
 	}
 	
 	@Override
 	public String signUP(String studentNum, String password, String name, String major) throws RemoteException {
-		LOG.info(logUser);
 		if(studentNum.equals(null) || password.equals(null) || name.equals(null) || major.equals(null)) return new StringReturn(StringReturnException.HAVE_NOT_VALUE).getErrorMessage();
 		if(data.checkStudent(studentNum) != null) return new StringReturn(StringReturnException.HAVE_STUDENT).getErrorMessage();
 		
@@ -172,8 +157,9 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	}
 
 	@Override
-	public void sendSeverStudentForLog(String logUser2) throws RemoteException {
-		logUser = logUser2;
+	public void sendSeverStudentForLog(String logUser) throws RemoteException {
+		this.logUser = logUser;
 		LOG.info(logUser);
 	}
+
 }

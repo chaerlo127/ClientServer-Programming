@@ -6,6 +6,11 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Data extends UnicastRemoteObject implements DataIF{
 	protected static StudentList studentList;
@@ -14,6 +19,7 @@ public class Data extends UnicastRemoteObject implements DataIF{
 	private static final long serialVersionUID = 1L;
 	private static String path = "C:\\Users\\chaeun\\Desktop\\JAVA\\workspace\\ClientServerProgramming\\Data";
 	String name;
+	private final static Logger LOG = Logger.getGlobal();
 	
 	protected Data() throws RemoteException {
 		super();
@@ -25,6 +31,7 @@ public class Data extends UnicastRemoteObject implements DataIF{
 			Data data = new Data();
 			Naming.bind("Data", data);
 			System.out.println("Data is ready !!!");
+			logConfigurationMethod();
 			studentList = new StudentList(path + "\\data\\Students.txt");
 			courseList = new CourseList(path + "\\data\\Courses.txt");
 			reservationList = new ReservationList();
@@ -35,7 +42,19 @@ public class Data extends UnicastRemoteObject implements DataIF{
 		catch (FileNotFoundException e) {System.out.println("FileNotFoundException: 파일의 값이 없습니다.");} 
 		catch (IOException e) {System.out.println("IOException: 파일을 읽어올 수 없습니다.");}
 	}
-
+	
+	private static void logConfigurationMethod() throws IOException {
+		Logger logger = Logger.getLogger("");
+		Handler[] handlers = logger.getHandlers();
+		if (handlers[0] instanceof ConsoleHandler) logger.removeHandler(handlers[0]);
+		
+		LOG.setLevel(Level.INFO);
+		Handler fileHandler = new FileHandler("server.log", true);
+		LogFormat formatter = new LogFormat();
+		fileHandler.setFormatter(formatter);
+		LOG.addHandler(fileHandler);
+	}
+	
 	@Override
 	public ArrayList<Student> getAllStudentData() throws RemoteException, NullDataException{
 		return studentList.getAllStudentRecords();
