@@ -16,7 +16,7 @@ public class LogFormat extends Formatter {
         
         buf.append(" [");
         buf.append(rec.getSourceMethodName());
-        buf.append("] \t");
+        buf.append("] ");
         
         buf.append(" [");
         buf.append("사용자 정보");

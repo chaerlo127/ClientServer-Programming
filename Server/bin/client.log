@@ -1,0 +1,7 @@
+START LOG
+2022-10-28 16:46 [login]  [사용자 정보] null
+2022-10-28 16:46 [login]  [사용자 정보] null
+2022-10-28 16:46 [sendSeverStudentForLog]  [사용자 정보] 20100123
+2022-10-28 16:46 [getAllStudentData]  [사용자 정보] 20100123
+2022-10-28 16:46 [getAllCourseList]  [사용자 정보] 20100123
+END LOG

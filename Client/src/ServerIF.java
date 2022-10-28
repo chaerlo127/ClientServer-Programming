@@ -18,4 +18,5 @@ public interface ServerIF extends Remote{
 	
 	String login(String studentNum, String password) throws RemoteException;
 	String signUP(String studentNum, String password, String name, String major) throws RemoteException;
+	void sendSeverStudentForLog(String logUser) throws RemoteException;
 }

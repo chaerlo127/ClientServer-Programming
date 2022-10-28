@@ -1,0 +1,49 @@
+START LOG
+END LOG
+START LOG
+2022-10-28 17:03 [login]  [사용자 정보] null
+2022-10-28 17:03 [login]  [사용자 정보] null
+2022-10-28 17:03 [login]  [사용자 정보] null
+2022-10-28 17:03 [login]  [사용자 정보] null
+2022-10-28 17:03 [login]  [사용자 정보] null
+2022-10-28 17:03 [login]  [사용자 정보] null
+2022-10-28 17:03 [sendSeverStudentForLog]  [사용자 정보] 20100123
+END LOG
+START LOG
+2022-10-28 17:06 [login]  [사용자 정보] null
+2022-10-28 17:06 [login]  [사용자 정보] null
+2022-10-28 17:06 [login]  [사용자 정보] null
+2022-10-28 17:06 [login]  [사용자 정보] null
+2022-10-28 17:06 [signUP]  [사용자 정보] null
+2022-10-28 17:06 [signUP]  [사용자 정보] null
+2022-10-28 17:07 [login]  [사용자 정보] null
+2022-10-28 17:07 [login]  [사용자 정보] null
+2022-10-28 17:07 [sendSeverStudentForLog]  [사용자 정보] 60201976
+2022-10-28 17:07 [signUP]  [사용자 정보] 60201976
+2022-10-28 17:07 [signUP]  [사용자 정보] 60201976
+END LOG
+START LOG
+2022-10-28 17:17 [login]  [사용자 정보] null
+2022-10-28 17:17 [login]  [사용자 정보] null
+2022-10-28 17:17 [login]  [사용자 정보] null
+2022-10-28 17:17 [login]  [사용자 정보] null
+2022-10-28 17:18 [signUP]  [사용자 정보] null
+2022-10-28 17:18 [signUP]  [사용자 정보] null
+2022-10-28 17:18 [signUP]  [사용자 정보] null
+2022-10-28 17:18 [signUP]  [사용자 정보] null
+2022-10-28 17:23 [signUP]  [사용자 정보] null
+2022-10-28 17:23 [signUP]  [사용자 정보] null
+2022-10-28 17:23 [signUP]  [사용자 정보] null
+2022-10-28 17:23 [signUP]  [사용자 정보] null
+END LOG
+START LOG
+2022-10-28 17:51 [signUP]  [사용자 정보] null
+2022-10-28 17:51 [signUP]  [사용자 정보] null
+2022-10-28 17:52 [signUP]  [사용자 정보] null
+2022-10-28 17:52 [signUP]  [사용자 정보] null
+2022-10-28 17:54 [login]  [사용자 정보] null
+2022-10-28 17:54 [login]  [사용자 정보] null
+2022-10-28 17:54 [sendSeverStudentForLog]  [사용자 정보] 20100123
+2022-10-28 17:55 [getAllStudentData]  [사용자 정보] 20100123
+2022-10-28 17:55 [signUP]  [사용자 정보] 20100123
+2022-10-28 17:55 [sendSeverStudentForLog]  [사용자 정보] 12345687

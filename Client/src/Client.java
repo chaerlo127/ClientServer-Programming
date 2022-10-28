@@ -22,15 +22,16 @@ public class Client {
 		String userConsoleInput = "";
 		try {
 			logConfigurationMethod();
+			String checkLogin = null;
 			while (!userConsoleInput.equals("0")) {
 				server = (ServerIF) Naming.lookup("Server");
 				
-				String checkLogin = null;
 				showInitialView();
 				userConsoleInput = objReader.readLine().trim();
-				checkLogin = userChecked(server, objReader, userConsoleInput, checkLogin);
+				checkLogin = userChecked(server, objReader, userConsoleInput);
 				if (checkLogin != null) {
 					logUser = checkLogin;
+					server.sendSeverStudentForLog(logUser);
 					while (!userConsoleInput.equals("99")) {userConsoleInput = registerCourseMenu(server, objReader);}
 				} else System.out.println("***********잘못입력했습니다. 다시 입력해주세요.***********"); 
 				checkLogin = null;
@@ -42,6 +43,7 @@ public class Client {
 		catch (IOException e) {	System.out.println("IOException: 파일을 읽어올 수 없습니다.");}
 		catch(NullDataException e) {System.out.println("NullDataException: 데이터에 값이 없습니다."); e.printStackTrace();}
 	}
+
 
 	private static void logConfigurationMethod() throws IOException {
 		Logger logger = Logger.getLogger("");
@@ -57,13 +59,15 @@ public class Client {
 		LOG.addHandler(fileHandler);
 	}
 
-	private static String userChecked(ServerIF server, BufferedReader objReader, String userConsoleInput, String checkLogin) throws IOException {
+	private static String userChecked(ServerIF server, BufferedReader objReader, String userConsoleInput) throws IOException {
+		String checkLogin = null;
 		switch(userConsoleInput) {
 		case "1": checkLogin = login(server, objReader); break;
 		case "2": checkLogin = signUP(server, objReader); break;
 		case "0": System.exit(0);
-		default: System.out.println("***********잘못입력했습니다. 다시 입력해주세요.***********"); break;
+		default: System.out.println("***********잘못입력했습니다***********"); break;
 		}
+		System.out.println(checkLogin);
 		return checkLogin;
 	}
 	
@@ -82,7 +86,7 @@ public class Client {
 		case "7": makeReservation(server, objReader); break;
 		case "8": showData(server.getAllReservationList()); break;
 		case "99": break;
-		default: System.out.println("***********잘못입력했습니다. 다시 입력해주세요.***********"); break;
+		default: System.out.println("*********** 잘못입력했습니다. 다시 입력해주세요.***********"); break;
 		}
 		return userConsoleInput;
 	}
@@ -91,10 +95,11 @@ public class Client {
 		System.out.println("----------- Login Information -----------"); 
 		System.out.print("학번:"); String studentNum = objReader.readLine().trim();
 		System.out.print("비밀번호:"); String password = objReader.readLine().trim();
-		System.out.println(server.login(studentNum, password));
+		String answer = server.login(studentNum, password);
+		System.out.println(answer);
 		
 		LOG.info(studentNum);
-		return server.login(studentNum, password).contains("성공") ? studentNum: null;
+		return answer.contains("성공") ? studentNum : null;
 	}
 
 	private static String signUP(ServerIF server, BufferedReader objReader) throws IOException {
@@ -103,10 +108,11 @@ public class Client {
 		System.out.print("비밀번호:"); String password = objReader.readLine().trim();
 		System.out.print("이름:"); String name = objReader.readLine().trim();
 		System.out.print("전공:"); String major = objReader.readLine().trim();
-		System.out.println(server.signUP(studentNum, password, name, major));
+		String answer = server.signUP(studentNum, password, name, major);
+		System.out.println(answer);
 		
 		LOG.info(studentNum);
-		return server.signUP(studentNum, password, name, major).contains("성공") ? studentNum: null;
+		return answer.contains("성공") ? studentNum: null;
 	}
 
 	private static void makeReservation(ServerIF server, BufferedReader objReader) throws IOException, RemoteException, NullDataException {
