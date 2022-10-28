@@ -15,9 +15,12 @@ public class LogFormat extends Formatter {
         buf.append(calcDate(rec.getMillis()));
         
         buf.append(" [");
-        buf.append(rec.getLevel());
+        buf.append(rec.getSourceMethodName());
         buf.append("] ");
         
+        buf.append(" [");
+        buf.append("사용자 정보");
+        buf.append("] ");
         buf.append(rec.getMessage());
         buf.append("\n");
         

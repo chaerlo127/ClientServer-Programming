@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 public class Client {
 	private final static Logger LOG = Logger.getGlobal();
+	private static String logUser;
 	public static void main(String[] args) {
 		
 		ServerIF server;
@@ -21,18 +22,18 @@ public class Client {
 		String userConsoleInput = "";
 		try {
 			logConfigurationMethod();
-			
 			while (!userConsoleInput.equals("0")) {
 				server = (ServerIF) Naming.lookup("Server");
 				
-				boolean checkLogin = false;
+				String checkLogin = null;
 				showInitialView();
 				userConsoleInput = objReader.readLine().trim();
 				checkLogin = userChecked(server, objReader, userConsoleInput, checkLogin);
-				if (checkLogin) {
+				if (checkLogin != null) {
+					logUser = checkLogin;
 					while (!userConsoleInput.equals("99")) {userConsoleInput = registerCourseMenu(server, objReader);}
 				} else System.out.println("***********잘못입력했습니다. 다시 입력해주세요.***********"); 
-				checkLogin = false;
+				checkLogin = null;
 			}
 		} 
 		catch (MalformedURLException e) { System.out.println("MalformedURLException: rmiRegistry를 찾을 수 없습니다.");}
@@ -56,11 +57,11 @@ public class Client {
 		LOG.addHandler(fileHandler);
 	}
 
-	private static boolean userChecked(ServerIF server, BufferedReader objReader, String userConsoleInput, boolean checkLogin) throws IOException {
+	private static String userChecked(ServerIF server, BufferedReader objReader, String userConsoleInput, String checkLogin) throws IOException {
 		switch(userConsoleInput) {
 		case "1": checkLogin = login(server, objReader); break;
 		case "2": checkLogin = signUP(server, objReader); break;
-		case "0": System.exit(0);;; 
+		case "0": System.exit(0);
 		default: System.out.println("***********잘못입력했습니다. 다시 입력해주세요.***********"); break;
 		}
 		return checkLogin;
@@ -86,16 +87,17 @@ public class Client {
 		return userConsoleInput;
 	}
 
-	private static boolean login(ServerIF server, BufferedReader objReader) throws IOException {
+	private static String login(ServerIF server, BufferedReader objReader) throws IOException {
 		System.out.println("----------- Login Information -----------"); 
 		System.out.print("학번:"); String studentNum = objReader.readLine().trim();
 		System.out.print("비밀번호:"); String password = objReader.readLine().trim();
 		System.out.println(server.login(studentNum, password));
 		
-		return server.login(studentNum, password).contains("성공") ? true: false;
+		LOG.info(studentNum);
+		return server.login(studentNum, password).contains("성공") ? studentNum: null;
 	}
 
-	private static boolean signUP(ServerIF server, BufferedReader objReader) throws IOException {
+	private static String signUP(ServerIF server, BufferedReader objReader) throws IOException {
 		System.out.println("----------- signUP Information -----------"); 
 		System.out.print("학번:"); String studentNum = objReader.readLine().trim();
 		System.out.print("비밀번호:"); String password = objReader.readLine().trim();
@@ -103,7 +105,8 @@ public class Client {
 		System.out.print("전공:"); String major = objReader.readLine().trim();
 		System.out.println(server.signUP(studentNum, password, name, major));
 		
-		return server.signUP(studentNum, password, name, major).contains("성공") ? true:false;
+		LOG.info(studentNum);
+		return server.signUP(studentNum, password, name, major).contains("성공") ? studentNum: null;
 	}
 
 	private static void makeReservation(ServerIF server, BufferedReader objReader) throws IOException, RemoteException, NullDataException {
@@ -115,12 +118,13 @@ public class Client {
 		String answer = server.addReservation(studentId + " " + courseId);
 		if(answer == "성공") System.out.println("SUCCESS");
 		else System.out.println(answer);
-		
+		LOG.info(logUser);
 	}
 
 	private static void deleteCourse(ServerIF server, BufferedReader objReader) throws RemoteException, IOException {
 		System.out.print("Course ID: "); 
 		System.out.println(server.deleteCourse(objReader.readLine().trim()));
+		LOG.info(logUser);
 	}
 
 	// throws RemoteException
@@ -130,7 +134,7 @@ public class Client {
 			list += dataList.get(i) + "\n";
 		}
 		System.out.println(list);
-
+		LOG.info(logUser);
 	}
 	
 	private static void addStudent(ServerIF server, BufferedReader objReader) throws RemoteException, IOException, NullDataException{
@@ -142,11 +146,13 @@ public class Client {
 		System.out.print("Student Completed Course: "); String completedCourse = objReader.readLine().trim();
 		
 		System.out.println(server.addStudent(studentId + " " + password+ " " + studentName + " " + studentDept + " " + completedCourse));
+		LOG.info(logUser);
 	}
 	
 	private static void deleteStudent(ServerIF server, BufferedReader objReader) throws RemoteException, IOException {
 		System.out.print("Student ID: "); 
 		System.out.println(server.deleteStudent(objReader.readLine().trim()));
+		LOG.info(logUser);
 	}
 	
 	private static void addCourse(ServerIF server, BufferedReader objReader) throws IOException, RemoteException, NullDataException {
@@ -158,6 +164,7 @@ public class Client {
 		System.out.print("PreCourse Name List: "); String precourseNameList = objReader.readLine().trim();
 
 		System.out.println(server.addCourse(courseId + " " + name + " " + courseName + " " + precourseNameList));
+		LOG.info(logUser);
 	}
 
 	private static void showMenu() {
@@ -171,6 +178,7 @@ public class Client {
 		System.out.println("7. Make Reservation");
 		System.out.println("8. List Reservation");
 		System.out.println("99. End");
+		LOG.info(logUser);
 	}
 
 	private static void showInitialView() {
@@ -178,6 +186,8 @@ public class Client {
 		System.out.println("1. Login");
 		System.out.println("2. Sign up");
 		System.out.println("0. END");
+		
+		LOG.info("사용자 정보 없음");
 	}
 
 }
