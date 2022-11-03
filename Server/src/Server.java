@@ -163,7 +163,6 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 		LOG.info(logUser);
 		if(studentNum.equals(null) || password.equals(null) || name.equals(null) || major.equals(null)) return new StringReturn(StringReturnException.HAVE_NOT_VALUE).getErrorMessage();
 		if(data.checkStudent(studentNum) != null) return new StringReturn(StringReturnException.HAVE_STUDENT).getErrorMessage();
-		
 		if(data.signUP(studentNum, password, name, major)) return new StringReturn(StringReturnException.SUCCESS).getErrorMessage();
 		return new StringReturn(StringReturnException.FAIL).getErrorMessage();
 	}

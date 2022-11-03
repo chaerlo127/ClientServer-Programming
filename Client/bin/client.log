@@ -1,0 +1,15 @@
+START LOG
+2022-11-03 21:38 [Client: showInitialView] 	 [사용자 정보] 사용자 정보 없음
+2022-11-03 21:38 [Client: signUP] 	 [사용자 정보] 60201976
+2022-11-03 21:38 [Client: showMenu] 	 [사용자 정보] 60201976
+2022-11-03 21:38 [Client: showData] 	 [사용자 정보] 60201976
+2022-11-03 21:38 [Client: showMenu] 	 [사용자 정보] 60201976
+2022-11-03 21:38 [Client: showData] 	 [사용자 정보] 60201976
+2022-11-03 21:38 [Client: showMenu] 	 [사용자 정보] 60201976
+END LOG
+START LOG
+2022-11-03 21:40 [Client: showInitialView] 	 [사용자 정보] 사용자 정보 없음
+2022-11-03 21:41 [Client: login] 	 [사용자 정보] 60201976
+2022-11-03 21:41 [Client: showMenu] 	 [사용자 정보] 60201976
+2022-11-03 21:41 [Client: showData] 	 [사용자 정보] 60201976
+2022-11-03 21:41 [Client: showMenu] 	 [사용자 정보] 60201976

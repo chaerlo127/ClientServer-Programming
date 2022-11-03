@@ -1,0 +1,8 @@
+START LOG
+2022-11-03 21:38 [Server: signUP] 	 [사용자 정보] null
+2022-11-03 21:38 [Server: sendSeverStudentForLog] 	 [사용자 정보] 60201976
+2022-11-03 21:38 [Server: getAllStudentData] 	 [사용자 정보] 60201976
+2022-11-03 21:38 [Server: getAllCourseList] 	 [사용자 정보] 60201976
+2022-11-03 21:41 [Server: login] 	 [사용자 정보] 60201976
+2022-11-03 21:41 [Server: sendSeverStudentForLog] 	 [사용자 정보] 60201976
+2022-11-03 21:41 [Server: getAllCourseList] 	 [사용자 정보] 60201976

@@ -43,7 +43,6 @@ public class Course implements Serializable{
     }
     
     public String toString() {
-    	System.out.println(this.courseName);
         String stringReturn = this.courseId + "\t" + this.name + "\t" + this.courseName + "\t";
         for (int i = 0; i < this.precourseNameList.size(); i++) {
             stringReturn = stringReturn +  " " + this.precourseNameList.get(i).toString();

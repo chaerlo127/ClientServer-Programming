@@ -1,0 +1,13 @@
+START LOG
+2022-11-03 21:38 [Data: checkStudent] 	 [사용자 정보] null
+2022-11-03 21:38 [StudentList: isRegisteredStudent] 	 [사용자 정보] null
+2022-11-03 21:38 [Data: signUP] 	 [사용자 정보] null
+2022-11-03 21:38 [StudentList: addStudentRecords] 	 [사용자 정보] null
+2022-11-03 21:38 [Data: sendServerStudentForLog] 	 [사용자 정보] 60201976
+2022-11-03 21:38 [Data: getAllStudentData] 	 [사용자 정보] 60201976
+2022-11-03 21:38 [StudentList: getAllStudentRecords] 	 [사용자 정보] 60201976
+2022-11-03 21:38 [Data: getAllCourseList] 	 [사용자 정보] 60201976
+2022-11-03 21:41 [Data: checkLogin] 	 [사용자 정보] 60201976
+2022-11-03 21:41 [StudentList: checkStudent] 	 [사용자 정보] 60201976
+2022-11-03 21:41 [Data: sendServerStudentForLog] 	 [사용자 정보] 60201976
+2022-11-03 21:41 [Data: getAllCourseList] 	 [사용자 정보] 60201976
