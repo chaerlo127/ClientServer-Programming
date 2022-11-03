@@ -16,7 +16,6 @@ public class Client {
 	private final static Logger LOG = Logger.getGlobal();
 	private static String logUser;
 	public static void main(String[] args) {
-		
 		ServerIF server;
 		BufferedReader objReader = new BufferedReader(new InputStreamReader(System.in));
 		String userConsoleInput = "";
