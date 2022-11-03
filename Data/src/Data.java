@@ -18,9 +18,8 @@ public class Data extends UnicastRemoteObject implements DataIF{
 	protected static ReservationList reservationList;
 	private static final long serialVersionUID = 1L;
 	private static String path = "C:\\Users\\chaeun\\Desktop\\JAVA\\workspace\\ClientServerProgramming\\Data";
-	String name;
 	private final static Logger LOG = Logger.getGlobal();
-	
+	String logUser;
 	protected Data() throws RemoteException {
 		super();
 	}
@@ -32,8 +31,8 @@ public class Data extends UnicastRemoteObject implements DataIF{
 			Naming.bind("Data", data);
 			System.out.println("Data is ready !!!");
 			logConfigurationMethod();
-			studentList = new StudentList(path + "\\data\\Students.txt");
-			courseList = new CourseList(path + "\\data\\Courses.txt");
+			studentList = new StudentList(path + "\\data\\Students.txt", LOG);
+			courseList = new CourseList(path + "\\data\\Courses.txt", LOG);
 			reservationList = new ReservationList();
 		} 
 		catch (MalformedURLException e) {System.out.println("MalformedURLException: rmiRegistry를 찾을 수 없습니다.");} 
@@ -57,77 +56,97 @@ public class Data extends UnicastRemoteObject implements DataIF{
 	
 	@Override
 	public ArrayList<Student> getAllStudentData() throws RemoteException, NullDataException{
-		return studentList.getAllStudentRecords();
+		LOG.info(logUser);
+		return studentList.getAllStudentRecords(this.logUser);
 	}
 	
 	@Override
 	public boolean addStudent(String studentInfo) throws RemoteException, NullDataException {
-		if(studentList.addStudentRecords(studentInfo)) return true;
+		LOG.info(logUser);
+		if(studentList.addStudentRecords(studentInfo, this.logUser)) return true;
 		else return false;
 	}
 
 	@Override
 	public boolean deleteStudent(String studentId) throws RemoteException {
-		if(studentList.deleteStudentRecords(studentId)) return true;
+		LOG.info(logUser);
+		if(studentList.deleteStudentRecords(studentId, this.logUser)) return true;
 		else return false;
 	}
 	
 	@Override
 	public ArrayList<Course> getAllCourseList() throws RemoteException, NullDataException{
-		return courseList.getAllCourseRecords();
+		LOG.info(logUser);
+		return courseList.getAllCourseRecords(this.logUser);
 	}
 
 	@Override
 	public boolean addCourse(String courseInfo) throws RemoteException, NullDataException {
-		if(courseList.addCourseRecords(courseInfo)) return true;
+		LOG.info(logUser);
+		if(courseList.addCourseRecords(courseInfo, this.logUser)) return true;
 		else return false;
 	}
 
 	@Override
 	public boolean deleteCourse(String courseId) throws RemoteException {
-		if(courseList.deleteCourseRecords(courseId)) return true;
+		LOG.info(logUser);
+		if(courseList.deleteCourseRecords(courseId, this.logUser)) return true;
 		else return false;
 	}
 
 	@Override
 	public boolean addReservation(String reservationInfo) throws RemoteException, NullDataException {
+		LOG.info(logUser);
 		if(reservationList.addReservationRecords(reservationInfo)) return true;
 		else return false;
 	}
 
 	@Override
 	public boolean deleteReservation(String reservationId) throws RemoteException {
+		LOG.info(logUser);
 		if(reservationList.deleteReservationRecords(reservationId)) return true;
 		else return false;
 	}
 
 	@Override
 	public ArrayList<Reservation> getAllReservationList() throws RemoteException, NullDataException {
+		LOG.info(logUser);
 		return reservationList.getAllReservation();
 	}
 
 	@Override
 	public Student checkStudent(String userId) throws RemoteException {
-		return studentList.isRegisteredStudent(userId);
+		LOG.info(logUser);
+		return studentList.isRegisteredStudent(userId, this.logUser);
 	}
 
 	@Override
 	public Course checkCourse(String courseId) throws RemoteException {
-		return courseList.checkCourseWithSID(courseId);
+		LOG.info(logUser);
+		return courseList.checkCourseWithSID(courseId, this.logUser);
 	}
 
 	@Override
 	public Student checkLogin(String userId, String password) throws RemoteException {
-		return studentList.checkStudent(userId, password);
+		LOG.info(logUser);
+		return studentList.checkStudent(userId, password, this.logUser);
 	}
 
 	@Override
 	public boolean signUP(String studentNum, String password, String name, String major) throws RemoteException, NullDataException {
-		return studentList.addStudentRecords(studentNum + " " + password + " " + name + " " + major);
+		LOG.info(logUser);
+		return studentList.addStudentRecords(studentNum + " " + password + " " + name + " " + major, this.logUser);
 	}
 
 	@Override
-	public boolean checkReservation(Reservation reservation) {
+	public boolean checkReservation(Reservation reservation) throws RemoteException{
+		LOG.info(logUser);
 		return reservationList.isRegisteredStudent(reservation.studentId, reservation.courseId);
+	}
+
+	@Override
+	public void sendServerStudentForLog(String logUser) throws RemoteException{
+		this.logUser = logUser;
+		LOG.info(logUser);
 	}
 }

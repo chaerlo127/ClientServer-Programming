@@ -18,4 +18,5 @@ public interface DataIF extends Remote{
 	Student checkLogin(String userId, String password) throws RemoteException;
 	boolean signUP(String studentNum, String password, String name, String major) throws RemoteException, NullDataException;
 	boolean checkReservation(Reservation reservation) throws RemoteException;
+	void sendServerStudentForLog(String logUser) throws RemoteException;
 }
