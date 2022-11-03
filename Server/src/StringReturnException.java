@@ -12,7 +12,8 @@ public enum StringReturnException {
 	NOT_DELETED_STUDENT(false, 209, "학생이 삭제되지 않았습니다."),
 	NOT_DELETED_RESERVATION(false, 210, "수강신청이 삭제되지 않았습니다."),
 	HAVE_STUDENT(false, 211, "이미 학생 정보가 저장되어 있습니다."),
-	HAVE_COURSE(false, 212, "이미 등록된 과목 번호 입니다.");
+	HAVE_COURSE(false, 212, "이미 등록된 과목 번호 입니다."),
+	CAN_NOT_MATCH_USER_AND_TOKEN(false, 213, "user의 token이 아닙니다.");
 	
 	private final boolean isSuccess;
 	private final String message;

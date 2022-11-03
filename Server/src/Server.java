@@ -50,50 +50,56 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	}
 	
 	@Override
-	public StringReturnResponse<ArrayList<Student>> getAllStudentData() throws RemoteException, NullDataException{
+	public StringReturnResponse<ArrayList<Student>> getAllStudentData(String userToken) throws RemoteException, NullDataException{
 		LOG.info(logUser);
+//		if(!checkAccessUser(userToken)) return new StringReturnResponse<ArrayList<Student>>(StringReturnException.CAN_NOT_MATCH_USER_AND_TOKEN);
 		return new StringReturnResponse<ArrayList<Student>>(data.getAllStudentData());
 	}
 	
 	@Override
-	public StringReturnResponse<String> addStudent(String studentInfo) throws RemoteException, NullDataException {
+	public StringReturnResponse<String> addStudent(String studentInfo, String userToken) throws RemoteException, NullDataException {
 		LOG.info(logUser);
+		if(!checkAccessUser(userToken)) return new StringReturnResponse<String>(StringReturnException.CAN_NOT_MATCH_USER_AND_TOKEN);
 		if(data.addStudent(studentInfo)) return new StringReturnResponse<String>("성공");
-		// 학번이 같으면 에러
 		else return new StringReturnResponse<String>(StringReturnException.NOT_ADD_STUDENT);
 	}
 	
 	@Override
-	public StringReturnResponse<String> deleteStudent(String studentId) throws RemoteException { // exception이 있다면 여기서 해야함. 
+	public StringReturnResponse<String> deleteStudent(String studentId, String userToken) throws RemoteException {
 		LOG.info(logUser);
+		if(!checkAccessUser(userToken)) return new StringReturnResponse<String>(StringReturnException.CAN_NOT_MATCH_USER_AND_TOKEN);
 		if(data.deleteStudent(studentId)) return new StringReturnResponse<String>("성공");
 		else return new StringReturnResponse<String>(StringReturnException.NOT_DELETED_STUDENT);
 	}
 	
 	@Override
-	public StringReturnResponse<ArrayList<Course>>  getAllCourseList() throws RemoteException, NullDataException{
+	public StringReturnResponse<ArrayList<Course>>  getAllCourseList(String userToken) throws RemoteException, NullDataException{
 		LOG.info(logUser);
+//		if(!checkAccessUser(userToken)) return new StringReturnResponse<ArrayList<Course>>(StringReturnException.CAN_NOT_MATCH_USER_AND_TOKEN);
 		return new StringReturnResponse<ArrayList<Course>>(data.getAllCourseList());
 	}
 	
 	@Override
-	public StringReturnResponse<String> addCourse(String courseInfo) throws RemoteException, NullDataException {
+	public StringReturnResponse<String> addCourse(String courseInfo, String userToken) throws RemoteException, NullDataException {
 		LOG.info(logUser);
+		if(!checkAccessUser(userToken)) return new StringReturnResponse<String>(StringReturnException.CAN_NOT_MATCH_USER_AND_TOKEN);
 		if(data.checkCourse(courseInfo) != null) return new StringReturnResponse<String>(StringReturnException.HAVE_COURSE);
 		if(data.addCourse(courseInfo)) return new StringReturnResponse<String>("성공");
 		else return new StringReturnResponse<String>(StringReturnException.NOT_ADD_COURSE);
 	}
 	
 	@Override
-	public StringReturnResponse<String> deleteCourse(String courseId) throws RemoteException {
+	public StringReturnResponse<String> deleteCourse(String courseId, String userToken) throws RemoteException {
 		LOG.info(logUser);
+		if(!checkAccessUser(userToken)) return new StringReturnResponse<String>(StringReturnException.CAN_NOT_MATCH_USER_AND_TOKEN);
 		if(data.deleteCourse(courseId)) return new StringReturnResponse<String>("성공");
 		else return new StringReturnResponse<String>(StringReturnException.NOT_ADD_COURSE);
 	}
 	
 	@Override
-	public StringReturnResponse<String> addReservation(String reservationInfo) throws RemoteException, NullDataException {
+	public StringReturnResponse<String> addReservation(String reservationInfo, String userToken) throws RemoteException, NullDataException {
 		LOG.info(logUser);
+		if(!checkAccessUser(userToken)) return new StringReturnResponse<String>(StringReturnException.CAN_NOT_MATCH_USER_AND_TOKEN);
 		if(reservationInfo.equals(" ")) return new StringReturnResponse<String>(StringReturnException.HAVE_NOT_VALUE);
 		
 		Reservation reservation = new Reservation(reservationInfo);
@@ -125,54 +131,81 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	}
 	
 	@Override
-	public StringReturnResponse<String> deleteReservation(String reservationId) throws RemoteException {
+	public StringReturnResponse<String> deleteReservation(String reservationId, String userToken) throws RemoteException {
 		LOG.info(logUser);
+		if(!checkAccessUser(userToken)) return new StringReturnResponse<String>(StringReturnException.CAN_NOT_MATCH_USER_AND_TOKEN);
 		if(data.deleteReservation(reservationId)) return new StringReturnResponse<String>("성공");
 		else return new StringReturnResponse<String>(StringReturnException.NOT_DELETED_RESERVATION);
 	}
 	
 	@Override
-	public StringReturnResponse<ArrayList<Reservation>> getAllReservationList() throws RemoteException {
+	public StringReturnResponse<ArrayList<Reservation>> getAllReservationList(String userToken) throws RemoteException {
 		LOG.info(logUser);
+//		if(!checkAccessUser(userToken)) return new StringReturnResponse<ArrayList<Reservation>>(StringReturnException.CAN_NOT_MATCH_USER_AND_TOKEN);
 		return new StringReturnResponse<ArrayList<Reservation>>(data.getAllReservationList());
 	}
 	
 	@Override
-	public StringReturnResponse<String> checkStudent(String userId) throws RemoteException {
+	public StringReturnResponse<String> checkStudent(String userId, String userToken) throws RemoteException {
 		LOG.info(logUser);
+		if(!checkAccessUser(userToken)) return new StringReturnResponse<String>(StringReturnException.CAN_NOT_MATCH_USER_AND_TOKEN);
 		if(data.checkStudent(userId) == null) return new StringReturnResponse<String>("성공");
 		else return new StringReturnResponse<String>(StringReturnException.HAVE_NOT_STUDENT);
 	}
 	
 	@Override
-	public StringReturnResponse<String> checkCourse(String courseId) throws RemoteException {
+	public StringReturnResponse<String> checkCourse(String courseId, String userToken) throws RemoteException {
 		LOG.info(logUser);
+		if(!checkAccessUser(userToken)) return new StringReturnResponse<String>(StringReturnException.CAN_NOT_MATCH_USER_AND_TOKEN);
 		if(data.checkCourse(courseId) == null) return new StringReturnResponse<String>("성공");
 		else return new StringReturnResponse<String>(StringReturnException.HAVE_NOT_COURSE);
 	}
 	
 	@Override
-	public StringReturnResponse<String> login(String studentNum, String password) throws RemoteException {
+	public StringReturnResponse<String> login(String studentNum, String password, String userToken) throws RemoteException {
 		LOG.info(logUser);
 		if(studentNum.equals(null) || password.equals(null)) return new StringReturnResponse<String>(StringReturnException.HAVE_NOT_VALUE);
-		if(data.checkLogin(studentNum, password) != null) return new StringReturnResponse<String>("성공");
+		if(data.checkLogin(studentNum, password) != null) {
+			String token = createToken(studentNum);
+			return token != null ? new StringReturnResponse<String>(token) :new StringReturnResponse<String>(StringReturnException.FAIL);
+		}
 		else return new StringReturnResponse<String>(StringReturnException.FAIL);
 	}
 	
 	@Override
-	public StringReturnResponse<String> signUP(String studentNum, String password, String name, String major) throws RemoteException {
+	public StringReturnResponse<String> signUP(String studentNum, String password, String name, String major, String userToken) throws RemoteException {
 		LOG.info(logUser);
 		if(studentNum.equals(null) || password.equals(null) || name.equals(null) || major.equals(null)) return new StringReturnResponse<String>(StringReturnException.HAVE_NOT_VALUE);
+		
 		if(data.checkStudent(studentNum) != null) return new StringReturnResponse<String>(StringReturnException.HAVE_STUDENT);
-		if(data.signUP(studentNum, password, name, major)) return new StringReturnResponse<String>("성공");
+		if(data.signUP(studentNum, password, name, major)) {
+			String token = createToken(studentNum);
+			return token != null ? new StringReturnResponse<String>(token) :new StringReturnResponse<String>(StringReturnException.FAIL);
+		}
 		return new StringReturnResponse<String>(StringReturnException.FAIL);
 	}
-
+	
 	@Override
 	public void sendSeverStudentForLog(String logUser) throws RemoteException {
 		this.logUser = logUser;
 		data.sendServerStudentForLog(logUser);
 		LOG.info(logUser);
+	}
+	
+	private String createToken(String studentNum) {
+		try {
+			return new AES128(USER_INFO_PASSWORD_KEY).encrypt(studentNum);
+		} catch (Exception ignored) { // 암호화가 실패하였을 경우 에러 발생
+		    System.out.println("error");        
+		} return null;
+	}
+	
+	private boolean checkAccessUser(String token) {
+		try {
+			return token.equals(new AES128(USER_INFO_PASSWORD_KEY).encrypt(logUser)) ? true : false;
+		} catch (Exception ignored) { // 암호화가 실패하였을 경우 에러 발생
+		    System.out.println("error");        
+		} return false;
 	}
 
 }
