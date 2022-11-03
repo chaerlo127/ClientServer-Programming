@@ -11,3 +11,60 @@ START LOG
 2022-11-03 21:41 [StudentList: checkStudent] 	 [사용자 정보] 60201976
 2022-11-03 21:41 [Data: sendServerStudentForLog] 	 [사용자 정보] 60201976
 2022-11-03 21:41 [Data: getAllCourseList] 	 [사용자 정보] 60201976
+START LOG
+END LOG
+START LOG
+END LOG
+START LOG
+2022-11-04 00:45 [Data: checkStudent] 	 [사용자 정보] null
+2022-11-04 00:45 [StudentList: isRegisteredStudent] 	 [사용자 정보] null
+2022-11-04 00:45 [Data: signUP] 	 [사용자 정보] null
+2022-11-04 00:45 [StudentList: addStudentRecords] 	 [사용자 정보] null
+2022-11-04 00:45 [Data: checkLogin] 	 [사용자 정보] null
+2022-11-04 00:45 [StudentList: checkStudent] 	 [사용자 정보] null
+2022-11-04 00:45 [Data: sendServerStudentForLog] 	 [사용자 정보] 60201976
+2022-11-04 00:45 [Data: getAllStudentData] 	 [사용자 정보] 60201976
+2022-11-04 00:45 [StudentList: getAllStudentRecords] 	 [사용자 정보] 60201976
+END LOG
+START LOG
+2022-11-04 01:40 [Data: checkStudent] 	 [사용자 정보] null
+2022-11-04 01:40 [StudentList: isRegisteredStudent] 	 [사용자 정보] null
+2022-11-04 01:40 [Data: signUP] 	 [사용자 정보] null
+2022-11-04 01:40 [StudentList: addStudentRecords] 	 [사용자 정보] null
+2022-11-04 01:41 [Data: checkLogin] 	 [사용자 정보] null
+2022-11-04 01:41 [StudentList: checkStudent] 	 [사용자 정보] null
+2022-11-04 01:46 [Data: checkLogin] 	 [사용자 정보] null
+2022-11-04 01:46 [StudentList: checkStudent] 	 [사용자 정보] null
+2022-11-04 01:49 [Data: checkLogin] 	 [사용자 정보] null
+2022-11-04 01:49 [StudentList: checkStudent] 	 [사용자 정보] null
+2022-11-04 01:49 [Data: checkLogin] 	 [사용자 정보] null
+2022-11-04 01:49 [StudentList: checkStudent] 	 [사용자 정보] null
+2022-11-04 01:52 [Data: checkLogin] 	 [사용자 정보] null
+2022-11-04 01:52 [StudentList: checkStudent] 	 [사용자 정보] null
+END LOG
+START LOG
+2022-11-04 01:56 [Data: checkLogin] 	 [사용자 정보] null
+2022-11-04 01:56 [StudentList: checkStudent] 	 [사용자 정보] null
+2022-11-04 02:00 [Data: checkLogin] 	 [사용자 정보] null
+2022-11-04 02:00 [StudentList: checkStudent] 	 [사용자 정보] null
+2022-11-04 02:02 [Data: checkLogin] 	 [사용자 정보] null
+2022-11-04 02:02 [StudentList: checkStudent] 	 [사용자 정보] null
+2022-11-04 02:03 [Data: checkLogin] 	 [사용자 정보] null
+2022-11-04 02:03 [StudentList: checkStudent] 	 [사용자 정보] null
+END LOG
+START LOG
+2022-11-04 02:07 [Data: checkLogin] 	 [사용자 정보] null
+2022-11-04 02:07 [StudentList: checkStudent] 	 [사용자 정보] null
+2022-11-04 02:07 [Data: checkLogin] 	 [사용자 정보] null
+2022-11-04 02:07 [StudentList: checkStudent] 	 [사용자 정보] null
+2022-11-04 02:07 [Data: sendServerStudentForLog] 	 [사용자 정보] 20100123
+2022-11-04 02:07 [Data: getAllStudentData] 	 [사용자 정보] 20100123
+2022-11-04 02:07 [StudentList: getAllStudentRecords] 	 [사용자 정보] 20100123
+2022-11-04 02:07 [Data: getAllCourseList] 	 [사용자 정보] 20100123
+2022-11-04 02:08 [Data: getAllStudentData] 	 [사용자 정보] 20100123
+2022-11-04 02:08 [StudentList: getAllStudentRecords] 	 [사용자 정보] 20100123
+2022-11-04 02:08 [Data: addStudent] 	 [사용자 정보] 20100123
+2022-11-04 02:08 [StudentList: addStudentRecords] 	 [사용자 정보] 20100123
+2022-11-04 02:08 [Data: getAllReservationList] 	 [사용자 정보] 20100123
+2022-11-04 02:08 [Data: checkStudent] 	 [사용자 정보] 20100123
+2022-11-04 02:08 [StudentList: isRegisteredStudent] 	 [사용자 정보] 20100123

@@ -37,7 +37,7 @@ public class Client {
 			}
 		} 
 		catch (MalformedURLException e) { System.out.println("MalformedURLException: rmiRegistry를 찾을 수 없습니다.");}
-		catch (RemoteException e) {System.out.println("RemoteException: 원격지에서 예외가 발생했습니다.");}
+		catch (RemoteException e) {System.out.println("RemoteException: 원격지에서 예외가 발생했습니다."); e.printStackTrace();}
 		catch (NotBoundException e) {System.out.println("NotBoundException: 이미 rmiRegistry에 연결할 Data가 없습니다.");}
 		catch (IOException e) {	System.out.println("IOException: 파일을 읽어올 수 없습니다.");}
 		catch(NullDataException e) {System.out.println("NullDataException: 데이터에 값이 없습니다."); e.printStackTrace();}
@@ -73,25 +73,25 @@ public class Client {
 		showMenu();
 		userConsoleInput = objReader.readLine().trim();
 		switch(userConsoleInput) {
-		case "1": showData(server.getAllStudentData()); break;
-		case "2": showData(server.getAllCourseList()); break;
+		case "1": showData(server.getAllStudentData().getResult()); break;
+		case "2": showData(server.getAllCourseList().getResult()); break;
 		case "3": addStudent(server, objReader); break;
 		case "4": addCourse(server, objReader);	break;
 		case "5": deleteStudent(server, objReader);	break;
 		case "6": deleteCourse(server, objReader); break;
 		case "7": makeReservation(server, objReader); break;
-		case "8": showData(server.getAllReservationList()); break;
+		case "8": showData(server.getAllReservationList().getResult()); break;
 		case "99": break;
 		default: System.out.println("*********** 잘못입력했습니다. 다시 입력해주세요.***********"); break;
 		}
 		return userConsoleInput;
 	}
 
-	private static String login(ServerIF server, BufferedReader objReader) throws IOException {
+	private static String login(ServerIF server, BufferedReader objReader) throws IOException, RemoteException {
 		System.out.println("----------- Login Information -----------"); 
 		System.out.print("학번:"); String studentNum = objReader.readLine().trim();
 		System.out.print("비밀번호:"); String password = objReader.readLine().trim();
-		String answer = server.login(studentNum, password);
+		String answer = server.login(studentNum, password).getMessage();
 		System.out.println(answer);
 		
 		LOG.info(studentNum);
@@ -104,7 +104,7 @@ public class Client {
 		System.out.print("비밀번호:"); String password = objReader.readLine().trim();
 		System.out.print("이름:"); String name = objReader.readLine().trim();
 		System.out.print("전공:"); String major = objReader.readLine().trim();
-		String answer = server.signUP(studentNum, password, name, major);
+		String answer = server.signUP(studentNum, password, name, major).getMessage();
 		System.out.println(answer);
 		
 		LOG.info(studentNum);
@@ -117,7 +117,7 @@ public class Client {
 		System.out.print("Student ID: "); String studentId = objReader.readLine().trim();
 		System.out.print("Course ID: "); String courseId = objReader.readLine().trim();
 		
-		String answer = server.addReservation(studentId + " " + courseId);
+		String answer = server.addReservation(studentId + " " + courseId).getMessage();
 		if(answer == "성공") System.out.println("SUCCESS");
 		else System.out.println(answer);
 		LOG.info(logUser);

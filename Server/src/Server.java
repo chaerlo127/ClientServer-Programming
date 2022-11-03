@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 public class Server extends UnicastRemoteObject implements ServerIF{
 	private static final long serialVersionUID = 1L;
 	private final static Logger LOG = Logger.getGlobal();
+	public static String USER_INFO_PASSWORD_KEY = "o9pqYVC9-F8_.PEzEiw!L9F6.AYj9jcfVJ*_i.ifXYnyE68kix@Q2dL6rw*bV-rpdZYwcqZG-jPF-fw3CiJyKsfZ778ks-*jnZn";
 	private static DataIF data;
 	String logUser;
 	
@@ -49,67 +50,67 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	}
 	
 	@Override
-	public ArrayList<Student> getAllStudentData() throws RemoteException, NullDataException{
+	public StringReturnResponse<ArrayList<Student>> getAllStudentData() throws RemoteException, NullDataException{
 		LOG.info(logUser);
-		return data.getAllStudentData();
+		return new StringReturnResponse<ArrayList<Student>>(data.getAllStudentData());
 	}
 	
 	@Override
-	public String addStudent(String studentInfo) throws RemoteException, NullDataException {
+	public StringReturnResponse<String> addStudent(String studentInfo) throws RemoteException, NullDataException {
 		LOG.info(logUser);
-		if(data.addStudent(studentInfo)) return new StringReturn(StringReturnException.SUCCESS).getErrorMessage();
+		if(data.addStudent(studentInfo)) return new StringReturnResponse<String>("성공");
 		// 학번이 같으면 에러
-		else return new StringReturn(StringReturnException.NOT_ADD_STUDENT).getErrorMessage();
+		else return new StringReturnResponse<String>(StringReturnException.NOT_ADD_STUDENT);
 	}
 	
 	@Override
-	public String deleteStudent(String studentId) throws RemoteException { // exception이 있다면 여기서 해야함. 
+	public StringReturnResponse<String> deleteStudent(String studentId) throws RemoteException { // exception이 있다면 여기서 해야함. 
 		LOG.info(logUser);
-		if(data.deleteStudent(studentId)) return new StringReturn(StringReturnException.SUCCESS).getErrorMessage();
-		else return new StringReturn(StringReturnException.NOT_DELETED_STUDENT).getErrorMessage();
+		if(data.deleteStudent(studentId)) return new StringReturnResponse<String>("성공");
+		else return new StringReturnResponse<String>(StringReturnException.NOT_DELETED_STUDENT);
 	}
 	
 	@Override
-	public ArrayList<Course> getAllCourseList() throws RemoteException, NullDataException{
+	public StringReturnResponse<ArrayList<Course>>  getAllCourseList() throws RemoteException, NullDataException{
 		LOG.info(logUser);
-		return data.getAllCourseList();
+		return new StringReturnResponse<ArrayList<Course>>(data.getAllCourseList());
 	}
 	
 	@Override
-	public String addCourse(String courseInfo) throws RemoteException, NullDataException {
+	public StringReturnResponse<String> addCourse(String courseInfo) throws RemoteException, NullDataException {
 		LOG.info(logUser);
-		if(data.checkCourse(courseInfo) != null) return new StringReturn(StringReturnException.HAVE_COURSE).getErrorMessage();
-		if(data.addCourse(courseInfo)) return new StringReturn(StringReturnException.SUCCESS).getErrorMessage();
-		else return new StringReturn(StringReturnException.NOT_ADD_COURSE).getErrorMessage();
+		if(data.checkCourse(courseInfo) != null) return new StringReturnResponse<String>(StringReturnException.HAVE_COURSE);
+		if(data.addCourse(courseInfo)) return new StringReturnResponse<String>("성공");
+		else return new StringReturnResponse<String>(StringReturnException.NOT_ADD_COURSE);
 	}
 	
 	@Override
-	public String deleteCourse(String courseId) throws RemoteException {
+	public StringReturnResponse<String> deleteCourse(String courseId) throws RemoteException {
 		LOG.info(logUser);
-		if(data.deleteCourse(courseId)) return new StringReturn(StringReturnException.SUCCESS).getErrorMessage();
-		else return new StringReturn(StringReturnException.NOT_ADD_COURSE).getErrorMessage();
+		if(data.deleteCourse(courseId)) return new StringReturnResponse<String>("성공");
+		else return new StringReturnResponse<String>(StringReturnException.NOT_ADD_COURSE);
 	}
 	
 	@Override
-	public String addReservation(String reservationInfo) throws RemoteException, NullDataException {
+	public StringReturnResponse<String> addReservation(String reservationInfo) throws RemoteException, NullDataException {
 		LOG.info(logUser);
-		if(reservationInfo.equals(" ")) return new StringReturn(StringReturnException.HAVE_NOT_VALUE).getErrorMessage();
+		if(reservationInfo.equals(" ")) return new StringReturnResponse<String>(StringReturnException.HAVE_NOT_VALUE);
 		
 		Reservation reservation = new Reservation(reservationInfo);
 		Student studentInfo = data.checkStudent(reservation.studentId);
 		Course course = data.checkCourse(reservation.courseId);
 		
-		if(studentInfo == null) return new StringReturn(StringReturnException.HAVE_NOT_STUDENT).getErrorMessage();
-		if(course == null) return new StringReturn(StringReturnException.HAVE_NOT_COURSE).getErrorMessage();
+		if(studentInfo == null) return new StringReturnResponse<String>(StringReturnException.HAVE_NOT_STUDENT);
+		if(course == null) return new StringReturnResponse<String>(StringReturnException.HAVE_NOT_COURSE);
 		
-		for(int i = 0; i<studentInfo.vStudent.size(); i++) {if(course.courseId.equals(studentInfo.vStudent.get(i))) return new StringReturn(StringReturnException.ALREADY_REGISTERED_COURSE).getErrorMessage();}
+		for(int i = 0; i<studentInfo.vStudent.size(); i++) {if(course.courseId.equals(studentInfo.vStudent.get(i))) return new StringReturnResponse<String>(StringReturnException.ALREADY_REGISTERED_COURSE);}
 		
-		if(checkPrecourse(studentInfo, course) != course.getPrecourseList().size()) return new StringReturn(StringReturnException.NOT_REGISTERED_PRECOURSE).getErrorMessage();;
+		if(checkPrecourse(studentInfo, course) != course.getPrecourseList().size()) return new StringReturnResponse<String>(StringReturnException.NOT_REGISTERED_PRECOURSE);
 	
 		// 이미 수강신청을 한 경우
-		if(data.checkReservation(reservation)) return new StringReturn(StringReturnException.ALREADY_REGISTERED_COURSE).getErrorMessage();
-		if(data.addReservation(reservationInfo)) return new StringReturn(StringReturnException.SUCCESS).getErrorMessage();
-		else return new StringReturn(StringReturnException.FAIL).getErrorMessage();
+		if(data.checkReservation(reservation)) return new StringReturnResponse<String>(StringReturnException.ALREADY_REGISTERED_COURSE);
+		if(data.addReservation(reservationInfo)) return new StringReturnResponse<String>("성공");
+		else return new StringReturnResponse<String>(StringReturnException.FAIL);
 	}
 
 	private int checkPrecourse(Student studentInfo, Course course) {
@@ -124,47 +125,47 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	}
 	
 	@Override
-	public String deleteReservation(String reservationId) throws RemoteException {
+	public StringReturnResponse<String> deleteReservation(String reservationId) throws RemoteException {
 		LOG.info(logUser);
-		if(data.deleteReservation(reservationId)) return new StringReturn(StringReturnException.SUCCESS).getErrorMessage();
-		else return new StringReturn(StringReturnException.NOT_DELETED_RESERVATION).getErrorMessage();
+		if(data.deleteReservation(reservationId)) return new StringReturnResponse<String>("성공");
+		else return new StringReturnResponse<String>(StringReturnException.NOT_DELETED_RESERVATION);
 	}
 	
 	@Override
-	public ArrayList<Reservation> getAllReservationList() throws RemoteException {
+	public StringReturnResponse<ArrayList<Reservation>> getAllReservationList() throws RemoteException {
 		LOG.info(logUser);
-		return data.getAllReservationList();
+		return new StringReturnResponse<ArrayList<Reservation>>(data.getAllReservationList());
 	}
 	
 	@Override
-	public String checkStudent(String userId) throws RemoteException {
+	public StringReturnResponse<String> checkStudent(String userId) throws RemoteException {
 		LOG.info(logUser);
-		if(data.checkStudent(userId) == null) return new StringReturn(StringReturnException.SUCCESS).getErrorMessage();
-		else return new StringReturn(StringReturnException.HAVE_NOT_STUDENT).getErrorMessage();
+		if(data.checkStudent(userId) == null) return new StringReturnResponse<String>("성공");
+		else return new StringReturnResponse<String>(StringReturnException.HAVE_NOT_STUDENT);
 	}
 	
 	@Override
-	public String checkCourse(String courseId) throws RemoteException {
+	public StringReturnResponse<String> checkCourse(String courseId) throws RemoteException {
 		LOG.info(logUser);
-		if(data.checkCourse(courseId) == null) return new StringReturn(StringReturnException.SUCCESS).getErrorMessage();
-		else return new StringReturn(StringReturnException.HAVE_NOT_COURSE).getErrorMessage();
+		if(data.checkCourse(courseId) == null) return new StringReturnResponse<String>("성공");
+		else return new StringReturnResponse<String>(StringReturnException.HAVE_NOT_COURSE);
 	}
 	
 	@Override
-	public String login(String studentNum, String password) throws RemoteException {
+	public StringReturnResponse<String> login(String studentNum, String password) throws RemoteException {
 		LOG.info(logUser);
-		if(studentNum.equals(null) || password.equals(null)) return new StringReturn(StringReturnException.HAVE_NOT_VALUE).getErrorMessage();
-		if(data.checkLogin(studentNum, password) != null) return new StringReturn(StringReturnException.SUCCESS).getErrorMessage();
-		else return new StringReturn(StringReturnException.FAIL).getErrorMessage();
+		if(studentNum.equals(null) || password.equals(null)) return new StringReturnResponse<String>(StringReturnException.HAVE_NOT_VALUE);
+		if(data.checkLogin(studentNum, password) != null) return new StringReturnResponse<String>("성공");
+		else return new StringReturnResponse<String>(StringReturnException.FAIL);
 	}
 	
 	@Override
-	public String signUP(String studentNum, String password, String name, String major) throws RemoteException {
+	public StringReturnResponse<String> signUP(String studentNum, String password, String name, String major) throws RemoteException {
 		LOG.info(logUser);
-		if(studentNum.equals(null) || password.equals(null) || name.equals(null) || major.equals(null)) return new StringReturn(StringReturnException.HAVE_NOT_VALUE).getErrorMessage();
-		if(data.checkStudent(studentNum) != null) return new StringReturn(StringReturnException.HAVE_STUDENT).getErrorMessage();
-		if(data.signUP(studentNum, password, name, major)) return new StringReturn(StringReturnException.SUCCESS).getErrorMessage();
-		return new StringReturn(StringReturnException.FAIL).getErrorMessage();
+		if(studentNum.equals(null) || password.equals(null) || name.equals(null) || major.equals(null)) return new StringReturnResponse<String>(StringReturnException.HAVE_NOT_VALUE);
+		if(data.checkStudent(studentNum) != null) return new StringReturnResponse<String>(StringReturnException.HAVE_STUDENT);
+		if(data.signUP(studentNum, password, name, major)) return new StringReturnResponse<String>("성공");
+		return new StringReturnResponse<String>(StringReturnException.FAIL);
 	}
 
 	@Override
