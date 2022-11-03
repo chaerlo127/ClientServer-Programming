@@ -48,7 +48,7 @@ public class Data extends UnicastRemoteObject implements DataIF{
 		if (handlers[0] instanceof ConsoleHandler) logger.removeHandler(handlers[0]);
 		
 		LOG.setLevel(Level.INFO);
-		Handler fileHandler = new FileHandler("server.log", true);
+		Handler fileHandler = new FileHandler("data.log", true);
 		LogFormat formatter = new LogFormat();
 		fileHandler.setFormatter(formatter);
 		LOG.addHandler(fileHandler);
