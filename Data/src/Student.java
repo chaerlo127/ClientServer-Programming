@@ -42,7 +42,7 @@ public class Student implements Serializable{
     }
     
     public String toString() {
-        String stringReturn = this.studentId + "\t" + this.name + "\t" + this.department + "\t";
+        String stringReturn = this.studentId + "\t" + this.password + "\t" + this.name + "\t" + this.department + "\t";
         for (int i = 0; i < this.vStudent.size(); i++) {
             stringReturn = stringReturn + " " + this.vStudent.get(i).toString();
         }
