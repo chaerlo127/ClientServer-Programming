@@ -10,7 +10,6 @@ public class Course implements Serializable{
     protected String courseName;
     protected ArrayList<String> precourseNameList;
 
-    // 여러 정보들을 자바의 class 형태로 : Entity Class, Value Object
     public Course(String inputString) {
         StringTokenizer stringTokenizer = new StringTokenizer(inputString);
     	this.courseId = stringTokenizer.nextToken();
@@ -34,9 +33,7 @@ public class Course implements Serializable{
         return false;
     }
     
-    public String getName() {
-        return this.name;
-    }
+    public String getName() {return this.name;}
     
     public ArrayList<String> getPrecourseList() {
         return this.precourseNameList;

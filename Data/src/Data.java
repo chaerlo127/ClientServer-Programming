@@ -20,11 +20,9 @@ public class Data extends UnicastRemoteObject implements DataIF{
 	private static String path = "C:\\Users\\chaeun\\Desktop\\JAVA\\workspace\\ClientServerProgramming\\Data";
 	private final static Logger LOG = Logger.getGlobal();
 	String logUser;
-	protected Data() throws RemoteException {
-		super();
-	}
 	
-	// 프로세스 
+	protected Data() throws RemoteException {super();}
+	
 	public static void main(String[] args)  {
 		try {
 			Data data = new Data();
@@ -33,7 +31,7 @@ public class Data extends UnicastRemoteObject implements DataIF{
 			logConfigurationMethod();
 			studentList = new StudentList(path + "\\data\\Students.txt", LOG);
 			courseList = new CourseList(path + "\\data\\Courses.txt", LOG);
-			reservationList = new ReservationList();
+			reservationList = new ReservationList(path + "\\data\\Reservation.txt", LOG);
 		} 
 		catch (MalformedURLException e) {System.out.println("MalformedURLException: rmiRegistry를 찾을 수 없습니다.");} 
 		catch (RemoteException e) {System.out.println("RemoteException: 원격지에서 예외가 발생했습니다.");} 
@@ -97,21 +95,21 @@ public class Data extends UnicastRemoteObject implements DataIF{
 	@Override
 	public boolean addReservation(String reservationInfo) throws RemoteException, NullDataException {
 		LOG.info(logUser);
-		if(reservationList.addReservationRecords(reservationInfo)) return true;
+		if(reservationList.addReservationRecords(reservationInfo, this.logUser)) return true;
 		else return false;
 	}
 
 	@Override
 	public boolean deleteReservation(String reservationId) throws RemoteException {
 		LOG.info(logUser);
-		if(reservationList.deleteReservationRecords(reservationId)) return true;
+		if(reservationList.deleteReservationRecords(reservationId, this.logUser)) return true;
 		else return false;
 	}
 
 	@Override
 	public ArrayList<Reservation> getAllReservationList() throws RemoteException, NullDataException {
 		LOG.info(logUser);
-		return reservationList.getAllReservation();
+		return reservationList.getAllReservation(this.logUser);
 	}
 
 	@Override
@@ -141,7 +139,7 @@ public class Data extends UnicastRemoteObject implements DataIF{
 	@Override
 	public boolean checkReservation(Reservation reservation) throws RemoteException{
 		LOG.info(logUser);
-		return reservationList.isRegisteredStudent(reservation.studentId, reservation.courseId);
+		return reservationList.isRegisteredStudent(reservation.studentId, reservation.courseId, this.logUser);
 	}
 
 	@Override
