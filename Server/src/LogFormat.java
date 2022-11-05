@@ -10,16 +10,16 @@ public class LogFormat extends Formatter {
     
     public String format(LogRecord rec) {
         StringBuffer buf = new StringBuffer(1000);
-        buf.append(calcDate(rec.getMillis()));
+        buf.append(calcDate(rec.getMillis())); // timestamp
         
-        buf.append(" [" + rec.getSourceClassName() + ": ");
-        buf.append(rec.getSourceMethodName());
+        buf.append(" [" + rec.getSourceClassName() + ": "); // class
+        buf.append(rec.getSourceMethodName()); // method
         buf.append("] \t");
         
         buf.append(" [");
         buf.append("사용자 정보");
         buf.append("] ");
-        buf.append(rec.getMessage());
+        buf.append(rec.getMessage()); // student information
         buf.append("\n");
         
         return buf.toString();

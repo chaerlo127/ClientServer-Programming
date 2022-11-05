@@ -25,21 +25,13 @@ public class Student implements Serializable{
     	}
     }
     
-    public boolean match(String studentId) {
-        return this.studentId.equals(studentId);
-    }
+    public boolean matchStudent(String studentId) {return this.studentId.equals(studentId);}
     
-    public boolean matchpw(String password) {
-        return this.password.equals(password);
-    }
+    public boolean matchpw(String password) { return this.password.equals(password); }
     
-    public String getName() {
-        return this.name;
-    }
+    public String getName() { return this.name; }
     
-    public ArrayList<String> getCompletedCourses() {
-        return this.vStudent;
-    }
+    public ArrayList<String> getCompletedCourses() { return this.vStudent;}
     
     public String toString() {
         String stringReturn = this.studentId + "\t" + this.password + "\t" + this.name + "\t" + this.department + "\t";

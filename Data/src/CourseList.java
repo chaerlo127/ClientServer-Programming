@@ -56,7 +56,7 @@ public class CourseList {
 		LOG.info(logUser);
 		for (int i = 0; i < this.vCourse.size(); i++) {
 			Course student = (Course) this.vCourse.get(i);
-			if (student.match(courseId)) {
+			if (student.matchStudent(courseId)) {
 				if(this.vCourse.remove(student)) {
 					deleteCourseFile();
 					return true;
@@ -85,7 +85,7 @@ public class CourseList {
 		LOG.info(logUser);
 		for (int i = 0; i < this.vCourse.size(); i++) {
 			Course course = (Course) this.vCourse.get(i);
-			if (course.match(sSID)) {
+			if (course.matchStudent(sSID)) {
 				return true;
 			}
 		}
@@ -96,7 +96,7 @@ public class CourseList {
 		LOG.info(logUser);
 		for (int i = 0; i < this.vCourse.size(); i++) {
 			Course course = (Course) this.vCourse.get(i);
-			if (course.match(sSID)) {
+			if (course.matchStudent(sSID)) {
 				return course;
 			}
 		}

@@ -47,7 +47,7 @@ public class StudentList {
 		LOG.info(logUser);
 		for (int i = 0; i < this.vStudentList.size(); i++) {
 			Student student = (Student) this.vStudentList.get(i);
-			if (student.match(studentId)) {
+			if (student.matchStudent(studentId)) {
 				if(this.vStudentList.remove(student)) {
 					deleteStudentFile();
 					return true;
@@ -89,7 +89,7 @@ public class StudentList {
 		LOG.info(logUser);
 		for (int i = 0; i < this.vStudentList.size(); i++) {
 			Student student = (Student) this.vStudentList.get(i);
-			if (student.match(sSID)) {
+			if (student.matchStudent(sSID)) {
 				return student;
 			}
 		}
@@ -100,7 +100,7 @@ public class StudentList {
 		LOG.info(logUser);
 		for (int i = 0; i < this.vStudentList.size(); i++) {
 			Student student = (Student) this.vStudentList.get(i);
-			if (student.match(sSID) && student.matchpw(password)) {
+			if (student.matchStudent(sSID) && student.matchpw(password)) {
 				return student;
 			}
 		}

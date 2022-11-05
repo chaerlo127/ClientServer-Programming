@@ -1,4 +1,3 @@
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -10,7 +9,6 @@ public class Course implements Serializable{
     protected String courseName;
     protected ArrayList<String> precourseNameList;
 
-    // 여러 정보들을 자바의 class 형태로 : Entity Class, Value Object
     public Course(String inputString) {
         StringTokenizer stringTokenizer = new StringTokenizer(inputString);
     	this.courseId = stringTokenizer.nextToken();
@@ -22,25 +20,11 @@ public class Course implements Serializable{
     	}
     }
     
-    public boolean match(String courseId) {
-        return this.courseId.equals(courseId);
-    }
+    public boolean matchStudent(String courseId) {return this.courseId.equals(courseId); }
     
-    public boolean matchPreCourse(String courseId) {
-    	for(int i = 0; i<this.precourseNameList.size(); i++) {
-    		this.precourseNameList.get(i).equals(courseId);
-    		return true;
-    	}
-        return false;
-    }
+    public String getName() {return this.name;}
     
-    public String getName() {
-        return this.name;
-    }
-    
-    public ArrayList<String> getPrecourseList() {
-        return this.precourseNameList;
-    }
+    public ArrayList<String> getPrecourseList() { return this.precourseNameList;}
     
     public String toString() {
         String stringReturn = this.courseId + "\t" + this.name + "\t" + this.courseName + "\t";

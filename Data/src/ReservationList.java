@@ -57,7 +57,7 @@ public class ReservationList {
 		LOG.info(logUser);
 		for (int i = 0; i < this.vReservList.size(); i++) {
 			Reservation reservation = (Reservation) this.vReservList.get(i);
-			if (reservation.match(studentId)) {
+			if (reservation.matchStudent(studentId)) {
 				if(this.vReservList.remove(reservation)) {
 					deleteStudentFile();
 					return true;
@@ -86,7 +86,7 @@ public class ReservationList {
 		LOG.info(logUser);
 		for (int i = 0; i < this.vReservList.size(); i++) {
 			Reservation reservation = (Reservation) this.vReservList.get(i);
-			if (reservation.match(studentId) && reservation.matchCourse(courseId)) {
+			if (reservation.matchStudent(studentId) && reservation.matchCourse(courseId)) {
 				return true;
 			}
 		}

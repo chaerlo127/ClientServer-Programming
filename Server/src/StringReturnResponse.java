@@ -16,7 +16,6 @@ public class StringReturnResponse<T> implements Serializable  {
 	        this.result = result;
 	}
 	
-	
 	// 요청에 실패한 경우
 	public StringReturnResponse(StringReturnException e) {
 		this.isSuccess = e.getSuccess();
@@ -29,5 +28,6 @@ public class StringReturnResponse<T> implements Serializable  {
 	}
 	
 	public T getResult() {return result;}
+	
 	public String getMessage() {return this.message;}
 }

@@ -21,23 +21,11 @@ public class Course implements Serializable{
     	}
     }
     
-    public boolean match(String courseId) {
-        return this.courseId.equals(courseId);
-    }
-    
-    public boolean matchPreCourse(String courseId) {
-    	for(int i = 0; i<this.precourseNameList.size(); i++) {
-    		this.precourseNameList.get(i).equals(courseId);
-    		return true;
-    	}
-        return false;
-    }
+    public boolean matchStudent(String courseId) {return this.courseId.equals(courseId); }
     
     public String getName() {return this.name;}
     
-    public ArrayList<String> getPrecourseList() {
-        return this.precourseNameList;
-    }
+    public ArrayList<String> getPrecourseList() { return this.precourseNameList;}
     
     public String toString() {
         String stringReturn = this.courseId + "\t" + this.name + "\t" + this.courseName + "\t";
