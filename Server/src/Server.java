@@ -164,7 +164,7 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	}
 	
 	@Override
-	public StringReturnResponse<String> login(String studentNum, String password, String userToken) throws RemoteException {
+	public StringReturnResponse<String> login(String studentNum, String password) throws RemoteException {
 		LOG.info(logUser);
 		if(studentNum.equals(null) || password.equals(null)) return new StringReturnResponse<String>(StringReturnException.HAVE_NOT_VALUE);
 		if(data.checkLogin(studentNum, password) != null) {
@@ -175,7 +175,7 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	}
 	
 	@Override
-	public StringReturnResponse<String> signUP(String studentNum, String password, String name, String major, String userToken) throws RemoteException {
+	public StringReturnResponse<String> signUP(String studentNum, String password, String name, String major) throws RemoteException {
 		LOG.info(logUser);
 		if(studentNum.equals(null) || password.equals(null) || name.equals(null) || major.equals(null)) return new StringReturnResponse<String>(StringReturnException.HAVE_NOT_VALUE);
 		

@@ -14,7 +14,6 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-// 암호화 관련 AES128(고급 암호화 표준)
 //참고 https://sunghs.tistory.com/119
 public class AES128 {
     private final String ips;
@@ -29,17 +28,11 @@ public class AES128 {
         this.keySpec = keySpec;
     }
     //암호화 관련 함수
-    public String encrypt(String value) throws NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException, InvalidAlgorithmParameterException, InvalidKeyException {
+    public String encrypt(String value) throws NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException, 
+    InvalidAlgorithmParameterException, InvalidKeyException {
         Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
         cipher.init(Cipher.ENCRYPT_MODE, keySpec, new IvParameterSpec(ips.getBytes()));
         byte[] encrypted = cipher.doFinal(value.getBytes(UTF_8));
         return new String(Base64.getEncoder().encode(encrypted));
-    }
-    //복호화 관련함수
-    public String decrypt(String value) throws NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException, InvalidAlgorithmParameterException, InvalidKeyException {
-        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        cipher.init(Cipher.DECRYPT_MODE, keySpec, new IvParameterSpec(ips.getBytes(UTF_8)));
-        byte[] decrypted = Base64.getDecoder().decode(value.getBytes());
-        return new String(cipher.doFinal(decrypted), UTF_8);
     }
 }

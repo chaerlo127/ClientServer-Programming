@@ -93,7 +93,7 @@ public class Client {
 		System.out.print("학번:"); String studentNum = objReader.readLine().trim();
 		System.out.print("비밀번호:"); String password = objReader.readLine().trim();
 		
-		StringReturnResponse<String> res = server.login(studentNum, password, userToken);
+		StringReturnResponse<String> res = server.login(studentNum, password);
 		userToken = res.getResult();
 		System.out.println(res.toString());
 		
@@ -108,7 +108,7 @@ public class Client {
 		System.out.print("이름:"); String name = objReader.readLine().trim();
 		System.out.print("전공:"); String major = objReader.readLine().trim();
 		
-		StringReturnResponse<String> res = server.signUP(studentNum, password, name, major, userToken);
+		StringReturnResponse<String> res = server.signUP(studentNum, password, name, major);
 		userToken = res.getResult();
 		System.out.println(res.toString());
 		
