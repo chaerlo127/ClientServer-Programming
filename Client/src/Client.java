@@ -28,7 +28,7 @@ public class Client {
 				
 				showInitialView();
 				userConsoleInput = objReader.readLine().trim();
-				checkLogin = userChecked(server, objReader, userConsoleInput);
+				checkLogin = checkUser(server, objReader, userConsoleInput);
 				if (checkLogin != null) {
 					logUser = checkLogin;
 					server.sendSeverStudentForLog(checkLogin);
@@ -57,7 +57,7 @@ public class Client {
 		LOG.addHandler(fileHandler);
 	}
 
-	private static String userChecked(ServerIF server, BufferedReader objReader, String userConsoleInput) throws IOException {
+	private static String checkUser(ServerIF server, BufferedReader objReader, String userConsoleInput) throws IOException {
 		String checkLogin = null;
 		switch(userConsoleInput) {
 		case "1": checkLogin = login(server, objReader); break;
@@ -146,13 +146,13 @@ public class Client {
 	
 	private static void addStudent(ServerIF server, BufferedReader objReader) throws RemoteException, IOException, NullDataException{
 		System.out.println("----------- Student Information -----------"); 
-		System.out.print("Student ID: "); String studentId = objReader.readLine().trim();
+		System.out.print("Student ID: "); String studentNum = objReader.readLine().trim();
 		System.out.print("Student password: "); String password = objReader.readLine().trim();
 		System.out.print("Student Name: "); String studentName = objReader.readLine().trim();
 		System.out.print("Student Department: "); String studentDept = objReader.readLine().trim();
 		System.out.print("Student Completed Course: "); String completedCourse = objReader.readLine().trim();
-		
-		System.out.println(server.addStudent(studentId + " " + password+ " " + studentName + " " + studentDept + " " + completedCourse, userToken));
+		StringReturnResponse<String> res = server.addStudent(studentNum + " " + password+ " " + studentName + " " + studentDept + " " + completedCourse, userToken);
+		System.out.println(res.toString());
 		LOG.info(logUser);
 	}
 	
@@ -165,12 +165,13 @@ public class Client {
 	private static void addCourse(ServerIF server, BufferedReader objReader) throws IOException, RemoteException, NullDataException {
 		/* add course: home work */ 
 		System.out.println("----------- Course Information -----------"); 
-		System.out.print("Course ID: "); String courseId = objReader.readLine().trim();
-		System.out.print("Professor Name: "); String name = objReader.readLine().trim();
+		System.out.print("Course ID: "); String courseNum = objReader.readLine().trim();
+		System.out.print("Professor Name: "); String professorName = objReader.readLine().trim();
 		System.out.print("Course Name: "); String courseName = objReader.readLine().trim();
 		System.out.print("PreCourse Name List: "); String precourseNameList = objReader.readLine().trim();
 
-		System.out.println(server.addCourse(courseId + " " + name + " " + courseName + " " + precourseNameList, userToken));
+		StringReturnResponse<String> res = server.addCourse(courseNum + " " + professorName + " " + courseName + " " + precourseNameList, userToken);
+		System.out.println(res.toString());
 		LOG.info(logUser);
 	}
 
