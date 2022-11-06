@@ -82,11 +82,15 @@ public class Client {
 		case "6": deleteCourse(server, objReader); break;
 		case "7": makeReservation(server, objReader); break;
 		case "8": showData(server.getAllReservationList(userToken).getResult()); break;
+		case "9": deleteReservation(server, objReader); break;
 		case "99": break;
 		default: System.out.println("*********** 잘못입력했습니다. 다시 입력해주세요.***********"); break;
 		}
 		return userConsoleInput;
 	}
+
+
+
 
 	private static String login(ServerIF server, BufferedReader objReader) throws IOException, RemoteException {
 		System.out.println("----------- Login Information -----------"); 
@@ -117,7 +121,6 @@ public class Client {
 	}
 
 	private static void makeReservation(ServerIF server, BufferedReader objReader) throws IOException, RemoteException, NullDataException {
-		/* Make reservation(수강 신청: Student ID Course ID 넣고 저장): student 체크, courseId 체크, 선수 과목 체크 home work */
 		System.out.println("----------- Reservation Information -----------"); 
 		System.out.print("Student ID: "); String studentId = objReader.readLine().trim();
 		System.out.print("Course ID: "); String courseId = objReader.readLine().trim();
@@ -134,6 +137,13 @@ public class Client {
 		LOG.info(logUser);
 	}
 
+	private static void deleteReservation(ServerIF server, BufferedReader objReader) throws RemoteException, IOException {
+		System.out.print("Student ID: "); String studentId = objReader.readLine().trim();
+		System.out.print("Course ID: "); String courseId = objReader.readLine().trim();
+		System.out.println(server.deleteReservation(studentId + " " + courseId, userToken));
+		LOG.info(logUser);
+	}
+	
 	// throws RemoteException
 	private static void showData(ArrayList<?> dataList) {
 		String list = "";
@@ -185,6 +195,7 @@ public class Client {
 		System.out.println("6. Delete Course");
 		System.out.println("7. Make Reservation");
 		System.out.println("8. List Reservation");
+		System.out.println("9. Delete Reservation");
 		System.out.println("99. End");
 		LOG.info(logUser);
 	}

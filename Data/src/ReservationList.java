@@ -53,13 +53,14 @@ public class ReservationList {
 		}
 	}
 	
-	public boolean deleteReservationRecords(String studentId, String logUser) {
+	public boolean deleteReservationRecords(String reservationInfo, String logUser) {
 		LOG.info(logUser);
+		Reservation userInfo = new Reservation(reservationInfo);
 		for (int i = 0; i < this.vReservList.size(); i++) {
 			Reservation reservation = (Reservation) this.vReservList.get(i);
-			if (reservation.matchStudent(studentId)) {
+			if (reservation.courseId.equals(userInfo.courseId) && reservation.studentId.equals(userInfo.studentId)) {
 				if(this.vReservList.remove(reservation)) {
-					deleteStudentFile();
+					deleteReservationFile();
 					return true;
 				}
 				else return false;
@@ -68,7 +69,7 @@ public class ReservationList {
 		return false;
 	}
 	
-	private void deleteStudentFile() {
+	private void deleteReservationFile() {
 		try {
 			BufferedWriter objFileWrite = new BufferedWriter(new FileWriter(sReservationFileName));
 			for(Reservation reservation: this.vReservList) {

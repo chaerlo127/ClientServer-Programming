@@ -109,7 +109,9 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 		if(studentInfo == null) return new StringReturnResponse<String>(StringReturnException.HAVE_NOT_STUDENT);
 		if(course == null) return new StringReturnResponse<String>(StringReturnException.HAVE_NOT_COURSE);
 		
-		for(int i = 0; i<studentInfo.vStudent.size(); i++) {if(course.courseId.equals(studentInfo.vStudent.get(i))) return new StringReturnResponse<String>(StringReturnException.ALREADY_REGISTERED_COURSE);}
+		for(int i = 0; i<studentInfo.vStudent.size(); i++) {
+			if(course.courseId.equals(studentInfo.vStudent.get(i))) 
+				return new StringReturnResponse<String>(StringReturnException.ALREADY_REGISTERED_COURSE);}
 		
 		if(checkPrecourse(studentInfo, course) != course.getPrecourseList().size()) return new StringReturnResponse<String>(StringReturnException.NOT_REGISTERED_PRECOURSE);
 	
