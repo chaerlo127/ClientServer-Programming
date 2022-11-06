@@ -158,7 +158,7 @@ public class Client {
 	
 	private static void deleteStudent(ServerIF server, BufferedReader objReader) throws RemoteException, IOException {
 		System.out.print("Student ID: "); 
-		System.out.println(server.deleteStudent(objReader.readLine().trim(), userToken));
+		System.out.println(server.deleteStudent(objReader.readLine().trim(), userToken).getResult());
 		LOG.info(logUser);
 	}
 	

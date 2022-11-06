@@ -52,7 +52,6 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	@Override
 	public StringReturnResponse<ArrayList<Student>> getAllStudentData(String userToken) throws RemoteException, NullDataException{
 		LOG.info(logUser);
-//		if(!checkAccessUser(userToken)) return new StringReturnResponse<ArrayList<Student>>(StringReturnException.CAN_NOT_MATCH_USER_AND_TOKEN);
 		return new StringReturnResponse<ArrayList<Student>>(data.getAllStudentData());
 	}
 	
@@ -77,7 +76,6 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	@Override
 	public StringReturnResponse<ArrayList<Course>>  getAllCourseList(String userToken) throws RemoteException, NullDataException{
 		LOG.info(logUser);
-//		if(!checkAccessUser(userToken)) return new StringReturnResponse<ArrayList<Course>>(StringReturnException.CAN_NOT_MATCH_USER_AND_TOKEN);
 		return new StringReturnResponse<ArrayList<Course>>(data.getAllCourseList());
 	}
 	
@@ -143,7 +141,6 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	@Override
 	public StringReturnResponse<ArrayList<Reservation>> getAllReservationList(String userToken) throws RemoteException {
 		LOG.info(logUser);
-//		if(!checkAccessUser(userToken)) return new StringReturnResponse<ArrayList<Reservation>>(StringReturnException.CAN_NOT_MATCH_USER_AND_TOKEN);
 		return new StringReturnResponse<ArrayList<Reservation>>(data.getAllReservationList());
 	}
 	
