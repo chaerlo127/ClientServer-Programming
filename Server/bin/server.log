@@ -1,0 +1,15 @@
+START LOG
+2022-11-06 20:31 [Server: login] 	 [사용자 정보] null
+2022-11-06 20:31 [Server: sendSeverStudentForLog] 	 [사용자 정보] 60201976
+2022-11-06 20:31 [Server: getAllStudentData] 	 [사용자 정보] 60201976
+2022-11-06 20:31 [Server: getAllCourseList] 	 [사용자 정보] 60201976
+2022-11-06 20:31 [Server: login] 	 [사용자 정보] 60201976
+2022-11-06 20:31 [Server: sendSeverStudentForLog] 	 [사용자 정보] 20130095
+2022-11-06 20:32 [Server: addCourse] 	 [사용자 정보] 20130095
+2022-11-06 20:32 [Server: addReservation] 	 [사용자 정보] 20130095
+2022-11-06 20:32 [Server: checkPrecourse] 	 [사용자 정보] 20130095
+2022-11-06 20:32 [Server: addReservation] 	 [사용자 정보] 20130095
+2022-11-06 20:32 [Server: checkPrecourse] 	 [사용자 정보] 20130095
+2022-11-06 20:32 [Server: getAllReservationList] 	 [사용자 정보] 20130095
+2022-11-06 20:33 [Server: deleteReservation] 	 [사용자 정보] 20130095
+2022-11-06 20:33 [Server: deleteReservation] 	 [사용자 정보] 20130095

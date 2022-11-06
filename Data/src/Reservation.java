@@ -22,7 +22,7 @@ public class Reservation implements Serializable{
     public String getCourseID() {return this.courseId;}
     
     public String toString() {
-        return "학번: " + this.studentId + "\t" + "과목 코드: " + this.courseId;
+        return this.studentId + "\t" + this.courseId;
     }
 
 }

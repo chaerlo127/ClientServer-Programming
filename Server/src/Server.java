@@ -83,7 +83,8 @@ public class Server extends UnicastRemoteObject implements ServerIF{
 	public StringReturnResponse<String> addCourse(String courseInfo, String userToken) throws RemoteException, NullDataException {
 		LOG.info(logUser);
 		if(!checkAccessUser(userToken)) return new StringReturnResponse<String>(StringReturnException.CAN_NOT_MATCH_USER_AND_TOKEN);
-		if(data.checkCourse(courseInfo) != null) return new StringReturnResponse<String>(StringReturnException.HAVE_COURSE);
+		Course course = new Course(courseInfo);
+		if(data.checkCourse(course.courseId) != null) return new StringReturnResponse<String>(StringReturnException.HAVE_COURSE);
 		if(data.addCourse(courseInfo)) return new StringReturnResponse<String>("¼º°ø");
 		else return new StringReturnResponse<String>(StringReturnException.NOT_ADD_COURSE);
 	}

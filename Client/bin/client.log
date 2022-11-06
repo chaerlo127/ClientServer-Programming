@@ -1,0 +1,24 @@
+START LOG
+2022-11-06 20:30 [Client: showInitialView] 	 [사용자 정보] 사용자 정보 없음
+2022-11-06 20:31 [Client: login] 	 [사용자 정보] 60201976
+2022-11-06 20:31 [Client: showMenu] 	 [사용자 정보] 60201976
+2022-11-06 20:31 [Client: showData] 	 [사용자 정보] 60201976
+2022-11-06 20:31 [Client: showMenu] 	 [사용자 정보] 60201976
+2022-11-06 20:31 [Client: showData] 	 [사용자 정보] 60201976
+2022-11-06 20:31 [Client: showMenu] 	 [사용자 정보] 60201976
+2022-11-06 20:31 [Client: showInitialView] 	 [사용자 정보] 사용자 정보 없음
+2022-11-06 20:31 [Client: login] 	 [사용자 정보] 20130095
+2022-11-06 20:31 [Client: showMenu] 	 [사용자 정보] 20130095
+2022-11-06 20:32 [Client: addCourse] 	 [사용자 정보] 20130095
+2022-11-06 20:32 [Client: showMenu] 	 [사용자 정보] 20130095
+2022-11-06 20:32 [Client: makeReservation] 	 [사용자 정보] 20130095
+2022-11-06 20:32 [Client: showMenu] 	 [사용자 정보] 20130095
+2022-11-06 20:32 [Client: makeReservation] 	 [사용자 정보] 20130095
+2022-11-06 20:32 [Client: showMenu] 	 [사용자 정보] 20130095
+2022-11-06 20:32 [Client: showData] 	 [사용자 정보] 20130095
+2022-11-06 20:32 [Client: showMenu] 	 [사용자 정보] 20130095
+2022-11-06 20:33 [Client: deleteReservation] 	 [사용자 정보] 20130095
+2022-11-06 20:33 [Client: showMenu] 	 [사용자 정보] 20130095
+2022-11-06 20:33 [Client: deleteReservation] 	 [사용자 정보] 20130095
+2022-11-06 20:33 [Client: showMenu] 	 [사용자 정보] 20130095
+2022-11-06 20:33 [Client: showInitialView] 	 [사용자 정보] 사용자 정보 없음
