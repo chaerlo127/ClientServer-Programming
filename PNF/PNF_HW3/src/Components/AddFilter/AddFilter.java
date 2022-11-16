@@ -35,7 +35,7 @@ public class AddFilter extends CommonFilterImpl{
                 for(int i = 0; i<idx; i++) 
                     out.write((char)buffer[i]);
                 CS_23456 = false;
-            }else if(CS_23456 == false && byte_read != -1) {
+            }else if(CS_23456 == false) {
             	for(int i = 0; i<idx-2; i++) 
                     out.write((char)buffer[i]);
             	writeAnswer(out, '2');
