@@ -10,16 +10,16 @@ import Components.Source.SourceFilter;
 public class LifeCycleManager {
     public static void main(String[] args) {
         try {
-            CommonFilter filter1 = new SourceFilter("Students.txt");
-            CommonFilter filter2 = new SinkFilter("Output.txt");
-            CommonFilter filter3 = new MiddleFilter();
+            CommonFilter studentFilterSource = new SourceFilter("Students.txt");
+            CommonFilter outputFilterSink = new SinkFilter("Output.txt");
+            CommonFilter middleFilter = new MiddleFilter();
             
-            filter1.connectOutputTo(filter3);
-            filter3.connectOutputTo(filter2);
+            studentFilterSource.connectOutputTo(middleFilter);
+            middleFilter.connectOutputTo(outputFilterSink);
             
-            Thread thread1 = new Thread(filter1);
-            Thread thread2 = new Thread(filter2);
-            Thread thread3 = new Thread(filter3);
+            Thread thread1 = new Thread(studentFilterSource);
+            Thread thread2 = new Thread(outputFilterSink);
+            Thread thread3 = new Thread(middleFilter);
             
             thread1.start();
             thread2.start();
