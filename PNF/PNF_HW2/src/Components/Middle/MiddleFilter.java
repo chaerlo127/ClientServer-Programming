@@ -14,7 +14,7 @@ public class MiddleFilter extends CommonFilterImpl{
         int numOfBlank = 0;
         int idx = 0;
         byte[] buffer = new byte[64];
-        boolean isCS = false;    
+        boolean isEE = false;    
         int byte_read = 0;
         
         while(true) {          
@@ -24,12 +24,12 @@ public class MiddleFilter extends CommonFilterImpl{
                 if(byte_read == ' ') numOfBlank++;
                 if(byte_read != -1) buffer[idx++] = (byte)byte_read;
                 if(numOfBlank == checkBlank && buffer[idx-3] == 'E' && buffer[idx-2] == 'E')
-                    isCS = true;
+                    isEE = true;
             }      
-            if(isCS == true) {
+            if(isEE == true) {
                 for(int i = 0; i<idx; i++) 
                     out.write((char)buffer[i]);
-                isCS = false;
+                isEE = false;
             }
             if (byte_read == -1) return true;
             idx = 0;

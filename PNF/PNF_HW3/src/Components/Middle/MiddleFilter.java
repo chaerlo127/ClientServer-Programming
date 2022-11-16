@@ -23,14 +23,14 @@ public class MiddleFilter extends CommonFilterImpl{
             	byte_read = in.read();
                 if(byte_read == ' ') numOfBlank++;
                 if(byte_read != -1) buffer[idx++] = (byte)byte_read;
-                if(numOfBlank == checkBlank && buffer[idx-3] == 'E' && buffer[idx-2] == 'E')
+                if(numOfBlank == checkBlank && buffer[idx-3] == 'C' && buffer[idx-2] == 'S')
                     isCS = true;
             }      
-            if(isCS == true) {
+            if(isCS == false && buffer[0] != 13) {
                 for(int i = 0; i<idx; i++) 
                     out.write((char)buffer[i]);
-                isCS = false;
             }
+            isCS = false;
             if (byte_read == -1) return true;
             idx = 0;
             numOfBlank = 0;
