@@ -3,7 +3,7 @@
  */
 package Framework;
 
-import Components.AddFilter.AddCourseFilter;
+import Components.AddCourseFilter.AddCourseFilter;
 import Components.Middle.MiddleFilter;
 import Components.Sink.SinkFilter;
 import Components.Source.FileSourceFilter;

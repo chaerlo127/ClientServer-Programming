@@ -1,7 +1,7 @@
 /**
  * Copyright(c) 2021 All rights reserved by Jungho Kim in Myungji University.
  */
-package Components.AddFilter;
+package Components.AddCourseFilter;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -11,11 +11,9 @@ import Framework.CommonFilterImpl;
 public class AddCourseFilter extends CommonFilterImpl{
 	
 	private String course1;
-	private String course2;
 	
-    public AddCourseFilter(String course1, String course2) {
+    public AddCourseFilter(String course1) {
     	this.course1 = course1;
-    	this.course2 = course2;
     }
 
 	@Override
@@ -37,10 +35,6 @@ public class AddCourseFilter extends CommonFilterImpl{
             if(!information.contains(course1) && byte_read != -1) {
             	information = information + " " + course1;
             }
-           
-            if(!information.contains(course2) && byte_read != -1) {
-            	information = information + " " + course2;
-            }
             
             buffer = information.getBytes();
             
@@ -49,6 +43,7 @@ public class AddCourseFilter extends CommonFilterImpl{
             out.write(10);
             
             if (byte_read == -1) return true;
+            
             idx = 0;
             byte_read = '\0';
         }
