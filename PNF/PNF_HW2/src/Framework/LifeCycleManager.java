@@ -3,7 +3,7 @@
  */
 package Framework;
 
-import Components.AddFilter.AddFilter;
+import Components.AddFilter.AddCourseFilter;
 import Components.Middle.MiddleFilter;
 import Components.Sink.SinkFilter;
 import Components.Source.SourceFilter;
@@ -13,8 +13,8 @@ public class LifeCycleManager {
         try {
             CommonFilter studentFilterSource = new SourceFilter("Students.txt");
             CommonFilter outputFilterSink = new SinkFilter("Output.txt");
-            CommonFilter middleFilter = new MiddleFilter();
-            CommonFilter addFilter = new AddFilter();
+            CommonFilter middleFilter = new MiddleFilter("EE");
+            CommonFilter addFilter = new AddCourseFilter("23456");
             
             studentFilterSource.connectOutputTo(middleFilter);
             middleFilter.connectOutputTo(addFilter);

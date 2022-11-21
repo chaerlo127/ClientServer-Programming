@@ -10,10 +10,10 @@ import java.io.IOException;
 
 import Framework.CommonFilterImpl;
 
-public class SourceFilter extends CommonFilterImpl{
+public class FileSourceFilter extends CommonFilterImpl{
     private String sourceFile;
     
-    public SourceFilter(String inputFile){
+    public FileSourceFilter(String inputFile){
         this.sourceFile = inputFile;
     }    
     @Override

@@ -10,6 +10,9 @@ import java.io.PipedOutputStream;
 
 // pipe는 자바 파일에서 가지고 있지만, filter는 새롭게 만들어 줘야 한다. 
 public abstract class CommonFilterImpl implements CommonFilter {
+	// arraylist와 portNO 들어가야 함. 
+	// component 고쳐주기
+	
 	protected PipedInputStream in = new PipedInputStream();
 	protected PipedOutputStream out = new PipedOutputStream();
 

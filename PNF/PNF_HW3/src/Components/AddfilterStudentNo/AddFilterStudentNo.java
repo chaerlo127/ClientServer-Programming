@@ -1,17 +1,17 @@
 /**
  * Copyright(c) 2021 All rights reserved by Jungho Kim in Myungji University.
  */
-package Components.Middle;
+package Components.AddfilterStudentNo;
 
 import java.io.IOException;
 import java.util.Arrays;
 
 import Framework.CommonFilterImpl;
 
-public class MiddleFilter extends CommonFilterImpl{
-	private String major;
-	public MiddleFilter(String major) {
-		this.major = major;
+public class AddFilterStudentNo extends CommonFilterImpl{
+	private String studentNo;
+	public AddFilterStudentNo(String studentNo) {
+		this.studentNo = studentNo;
 	}
 
 	@Override
@@ -30,12 +30,10 @@ public class MiddleFilter extends CommonFilterImpl{
             
             String information = new String(buffer);
             
-			if (!information.contains(major) && buffer[0] != 13) {
+			if (information.contains(studentNo)) {
 				out.write(buffer);
 			}
-			
 			if (byte_read == -1) return true;
-            
             idx = 0;
             byte_read = '\0';
         }

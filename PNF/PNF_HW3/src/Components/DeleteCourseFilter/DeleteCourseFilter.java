@@ -1,18 +1,22 @@
 /**
  * Copyright(c) 2021 All rights reserved by Jungho Kim in Myungji University.
  */
-package Components.Middle;
+package Components.DeleteCourseFilter;
 
 import java.io.IOException;
 import java.util.Arrays;
 
 import Framework.CommonFilterImpl;
 
-public class MiddleFilter extends CommonFilterImpl{
-	private String major;
-	public MiddleFilter(String major) {
-		this.major = major;
-	}
+public class DeleteCourseFilter extends CommonFilterImpl{
+	
+	private String course1;
+	private String course2;
+	
+    public DeleteCourseFilter(String course1, String course2) {
+    	this.course1 = course1;
+    	this.course2 = course2;
+    }
 
 	@Override
     public boolean specificComputationForFilter() throws IOException {
@@ -25,20 +29,30 @@ public class MiddleFilter extends CommonFilterImpl{
             	byte_read = in.read();
                 if(byte_read != -1 && byte_read != 13 && byte_read != 10) buffer[idx++] = (byte)byte_read;
             }
+           
             buffer = Arrays.copyOf(buffer, idx);
             
             String information = new String(buffer);
-            
-            if(information.contains(major) && byte_read != -1) {
-            	buffer = information.getBytes();
-            	 out.write(buffer);
-                 out.write(13);
-                 out.write(10);
+            if(information.contains(course1)) {
+            	information = information.replace(course1, "");
+            }
+           
+            if(information.contains(course2)) {
+            	information = information.replace(course2, "");
             }
             
+            buffer = information.getBytes();
+            
+            out.write(buffer);
+            out.write(13);
+            out.write(10);
+            
             if (byte_read == -1) return true;
+            
             idx = 0;
             byte_read = '\0';
         }
     }
+
+	
 }

@@ -4,37 +4,45 @@
 package Components.Middle;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import Framework.CommonFilterImpl;
 
 public class MiddleFilter extends CommonFilterImpl{
-    @Override
+	private String major;
+	public MiddleFilter(String major) {
+		this.major = major;
+	}
+
+	@Override
     public boolean specificComputationForFilter() throws IOException {
-    	int checkBlank = 4; 
-        int numOfBlank = 0;
-        int idx = 0;
-        byte[] buffer = new byte[64];
-        boolean isEE = false;    
-        int byte_read = 0;
-        
-        while(true) {          
+        while(true) {
+        	int idx = 0;
+            byte[] buffer = new byte[64];
+            int byte_read = 0;
         	// check "CS" on byte_read from student information
             while(byte_read != '\n' && byte_read != -1) {
             	byte_read = in.read();
-                if(byte_read == ' ') numOfBlank++;
-                if(byte_read != -1) buffer[idx++] = (byte)byte_read;
-                if(numOfBlank == checkBlank && buffer[idx-3] == 'E' && buffer[idx-2] == 'E')
-                    isEE = true;
-            }      
-            if(isEE == true) {
-                for(int i = 0; i<idx; i++) 
-                    out.write((char)buffer[i]);
-                isEE = false;
+                if(byte_read != -1 && byte_read != 13 && byte_read != 10) buffer[idx++] = (byte)byte_read;
             }
-            if (byte_read == -1) return true;
+            
+            
+            
+            buffer = Arrays.copyOf(buffer, idx);
+            
+            String information = new String(buffer);
+            
+			if (information.contains(major)) {
+				buffer = information.getBytes();
+				out.write(buffer);
+				out.write(13);
+				out.write(10);
+			}
+            
+			if (byte_read == -1) return true;
+			
             idx = 0;
-            numOfBlank = 0;
             byte_read = '\0';
         }
-    }  
+    }
 }
