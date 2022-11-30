@@ -32,7 +32,7 @@ public class LifeCycleManager {
             
             thread1.start();
             thread2.start();
-            thread3.start();
+            thread3.start();  
             thread4.start();
             thread5.start();
         } catch(Exception e) {
