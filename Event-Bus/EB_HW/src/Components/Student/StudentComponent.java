@@ -34,4 +34,10 @@ public class StudentComponent {
 		}
 		return false;
 	}
+	public Student getStudentInfo(String message) {
+		for (int i = 0; i < this.vStudent.size(); i++) {
+			if(this.vStudent.get(i).match(message)) return this.vStudent.get(i);
+		}
+		return null;
+	}
 }

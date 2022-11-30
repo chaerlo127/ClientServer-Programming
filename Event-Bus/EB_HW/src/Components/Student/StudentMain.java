@@ -41,6 +41,10 @@ public class StudentMain {
 					printLogEvent("Get", event);
 					eventBus.sendEvent(new Event(EventId.ClientOutput, registerStudent(studentsList, event.getMessage())));
 					break;
+				case DeleteStudents:
+					printLogEvent("Delete", event);
+					eventBus.sendEvent(new Event(EventId.ClientOutput, deleteStudent(studentsList, event.getMessage())));
+					break;
 				case QuitTheSystem:
 					printLogEvent("Get", event);
 					eventBus.unRegister(componentId);
@@ -52,8 +56,9 @@ public class StudentMain {
 			}
 		}
 	}
+
 	private static String registerStudent(StudentComponent studentsList, String message) {
-		Student  student = new Student(message);
+		Student student = new Student(message);
 		if (!studentsList.isRegisteredStudent(student.studentId)) {
 			studentsList.vStudent.add(student);
 			return "This student is successfully added.";
@@ -66,6 +71,12 @@ public class StudentMain {
 			returnString += studentsList.getStudentList().get(j).getString() + "\n";
 		}
 		return returnString;
+	}
+	private static String deleteStudent(StudentComponent studentsList, String message) {
+		Student student = studentsList.getStudentInfo(message);
+		if(student == null) return "This student is not existed.";
+		if(studentsList.vStudent.remove(student)) return "This student is successfully deleted. ";
+		else return "This student is not deleted .";
 	}
 	private static void printLogEvent(String comment, Event event) {
 		System.out.println(

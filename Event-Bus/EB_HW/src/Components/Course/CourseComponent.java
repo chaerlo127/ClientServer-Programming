@@ -30,4 +30,10 @@ public class CourseComponent {
         }
         return false;
     }
+	public Course getCourseInfo(String message) {
+		for (int i = 0; i < this.vCourse.size(); i++) {
+			if(this.vCourse.get(i).match(message)) return this.vCourse.get(i);
+		}
+		return null;
+	}
 }
