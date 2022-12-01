@@ -34,6 +34,9 @@ public class Course {
     public String getName() {
         return this.name;
     }
+    public ArrayList<String> getPreCourseList(){
+    	return this.prerequisiteCoursesList;
+    }
     public String getString() {
         String stringReturn = this.courseId + " " + this.instructor + " " + this.name;
         for(int i = 0; i < this.prerequisiteCoursesList.size(); i++) {

@@ -50,6 +50,10 @@ public class ClientInputMain {
 					eventBus.sendEvent(new Event(EventId.DeleteCourses, deleteCourseInfo()));
 					printLogSend(EventId.DeleteCourses);
 					break;
+				case "7":
+					eventBus.sendEvent(new Event(EventId.RegisterReservation, makeReservation()));
+					printLogSend(EventId.RegisterReservation);
+					break;
 				case "0":
 					eventBus.sendEvent(new Event(EventId.QuitTheSystem, "Quit the system!!!"));
 					printLogSend(EventId.QuitTheSystem);
@@ -64,10 +68,10 @@ public class ClientInputMain {
 			}
 		}
 	}
+
 	private static String makeStudentInfo() throws IOException {
 		String userInput = "";
-		System.out.println("\nEnter student ID and press return (Ex. 20131234)>> ");
-		userInput = new BufferedReader(new InputStreamReader(System.in)).readLine().trim();
+		userInput = setStudentId();
 		System.out.println("\nEnter family name and press return (Ex. Hong)>> ");
 		userInput += " " + new BufferedReader(new InputStreamReader(System.in)).readLine().trim();
 		System.out.println("\nEnter first name and press return (Ex. Gildong)>> ");
@@ -83,8 +87,7 @@ public class ClientInputMain {
 	}
 	private static String makeCourseInfo() throws IOException {
 		String userInput = "";
-		System.out.println("\nEnter course ID and press return (Ex. 12345)>> ");
-		userInput = new BufferedReader(new InputStreamReader(System.in)).readLine().trim();
+		userInput = setCourseId();
 		System.out.println("\nEnter the family name of the instructor and press return (Ex. Hong)>> ");
 		userInput += " " + new BufferedReader(new InputStreamReader(System.in)).readLine().trim();
 		System.out.println(
@@ -98,15 +101,15 @@ public class ClientInputMain {
 		return userInput;
 	}
 	private static String deleteStudentInfo() throws IOException{
-		String userInput = "";
-		System.out.println("\nEnter student ID and press return (Ex. 20131234)>> ");
-		userInput = new BufferedReader(new InputStreamReader(System.in)).readLine().trim();
-		return userInput;
+		return setStudentId();
 	}
 	private static String deleteCourseInfo() throws IOException{
+		return setCourseId();
+	}
+	private static String makeReservation() throws IOException {
 		String userInput = "";
-		System.out.println("\nEnter course ID and press return (Ex. 12345)>> ");
-		userInput = new BufferedReader(new InputStreamReader(System.in)).readLine().trim();
+		userInput = setStudentId();
+		userInput += " " + setCourseId();
 		return userInput;
 	}
 	//@SuppressWarnings("unused")
@@ -126,6 +129,7 @@ public class ClientInputMain {
 		System.out.println("4. Register a new Course");
 		System.out.println("5. Delete a Student");
 		System.out.println("6. Delete a Course");
+		System.out.println("7. Register a Reservation");
 		System.out.println("0. Quit the system");
 		System.out.print("\n Choose No.: ");
 	}

@@ -38,4 +38,10 @@ public class Student {
 			stringReturn += " " + this.completedCoursesList.get(i).toString();
 		return stringReturn;
 	}
+	public boolean isRegisteredCourse(String courseId) {
+		for(int i = 0; i<completedCoursesList.size(); i++) {
+			if(courseId.equals(completedCoursesList.get(i))) return true;
+		}
+		return false;
+	}
 }
