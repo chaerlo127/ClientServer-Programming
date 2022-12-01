@@ -33,7 +33,7 @@ public class ReservationMain {
 			for (int i = 0; i < eventQueue.getSize(); i++) {
 				event = eventQueue.getEvent();
 				switch (event.getEventId()) {
-				case ListCourses:
+				case ListReservations:
 					printLogEvent("Get", event);
 					eventBus.sendEvent(new Event(EventId.ClientOutput, makeReservationList(reservationsList)));
 					break;

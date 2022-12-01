@@ -54,6 +54,10 @@ public class ClientInputMain {
 					eventBus.sendEvent(new Event(EventId.RegisterReservation, makeReservation()));
 					printLogSend(EventId.RegisterReservation);
 					break;
+				case "8":
+					eventBus.sendEvent(new Event(EventId.ListReservations, null));
+					printLogSend(EventId.ListReservations);
+					break;
 				case "0":
 					eventBus.sendEvent(new Event(EventId.QuitTheSystem, "Quit the system!!!"));
 					printLogSend(EventId.QuitTheSystem);
@@ -130,6 +134,7 @@ public class ClientInputMain {
 		System.out.println("5. Delete a Student");
 		System.out.println("6. Delete a Course");
 		System.out.println("7. Register a Reservation");
+		System.out.println("8. List Reservations");
 		System.out.println("0. Quit the system");
 		System.out.print("\n Choose No.: ");
 	}
