@@ -1,0 +1,13 @@
+start rmiregistry
+
+java Framework.RMIEventBusImpl
+
+java Components.ClientInput.ClientInputMain
+
+java Components.Student.StudentMain
+
+java Components.Course.CourseMain
+
+java Components.Reservation.ReservationMain
+
+java Components.ClientOutput.ClientOutputMain
