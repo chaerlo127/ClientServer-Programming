@@ -21,6 +21,11 @@ public class CourseComponent {
         }    
         bufferedReader.close();
     }
+    
+    public CourseComponent(ArrayList<Course> vCourse) {
+    	this.vCourse = vCourse;
+    }
+    
     public ArrayList<Course> getCourseList() {
         return this.vCourse;
     }

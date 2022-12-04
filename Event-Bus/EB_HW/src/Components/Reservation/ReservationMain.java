@@ -8,7 +8,10 @@ import java.io.IOException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
+import Components.Course.Course;
+import Components.Student.Student;
 import Framework.Event;
 import Framework.EventId;
 import Framework.EventQueue;
@@ -53,7 +56,8 @@ public class ReservationMain {
 	}
 
 	private static String makeRegisterReservation(ReservationComponent reservationsList, String message) {
-		Reservation reservation = new Reservation(message);
+		Reservation reservation = parseMessage(reservationsList, message);
+		
 		if(!reservationsList.courseList.isRegisteredCourse(reservation.courseId)) return "This course is not registered. ";
 		if(!reservationsList.studentList.isRegisteredStudent(reservation.studentId)) return "This student is not registered. ";
 		if(reservationsList.studentList.getStudentInfo(reservation.studentId).isRegisteredCourse(reservation.courseId)) return "This Student had already registered. ";
@@ -70,6 +74,29 @@ public class ReservationMain {
 
 		if(reservationsList.addReservationRecords(message)) return "This course is successfully added. ";
 		else return "This course is not successfully added. ";
+	}
+
+	private static Reservation parseMessage(ReservationComponent reservationsList, String message) {
+		Scanner st = new Scanner(message);
+		
+		String studentId = st.next();
+		String courseId = st.next();
+		Reservation reservation = new Reservation(studentId + " " + courseId);
+		
+		reservationsList.initialize();
+		
+		String command = st.nextLine();
+		while(!command.equals("STUDENTINFO")) {
+			reservationsList.studentList.getStudentList().add(new Student(command));
+			command = st.nextLine();
+		}
+		command = st.nextLine();
+		while(!command.equals("COURSEINFO")) {
+			reservationsList.courseList.getCourseList().add(new Course(command));
+			command = st.nextLine();
+		}
+		st.close();
+		return reservation;
 	}
 
 	private static String makeReservationList(ReservationComponent reservationsList) {

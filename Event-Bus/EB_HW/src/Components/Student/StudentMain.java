@@ -45,6 +45,10 @@ public class StudentMain {
 					printLogEvent("Delete", event);
 					eventBus.sendEvent(new Event(EventId.ClientOutput, deleteStudent(studentsList, event.getMessage())));
 					break;
+				case RegisterReservationPre:
+					printLogEvent("Get", event);
+					eventBus.sendEvent(new Event(EventId.RegisterReservationPreCourse, registerReservation(studentsList, event.getMessage())));
+					break;
 				case QuitTheSystem:
 					printLogEvent("Get", event);
 					eventBus.unRegister(componentId);
@@ -55,6 +59,14 @@ public class StudentMain {
 				}
 			}
 		}
+	}
+
+	private static String registerReservation(StudentComponent studentsList, String message) {
+		String returnString = message;
+		for (int j = 0; j < studentsList.vStudent.size(); j++) {
+			returnString += studentsList.getStudentList().get(j).getString() + "\n";
+		}
+		return returnString + "STUDENTINFO"+ "\n";
 	}
 
 	private static String registerStudent(StudentComponent studentsList, String message) {

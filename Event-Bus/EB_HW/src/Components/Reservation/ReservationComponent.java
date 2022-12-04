@@ -11,14 +11,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import Components.Course.Course;
 import Components.Course.CourseComponent;
+import Components.Student.Student;
 import Components.Student.StudentComponent;
 
 public class ReservationComponent {
 	protected ArrayList<Reservation> vReservList;
-	protected CourseComponent courseList = new CourseComponent("Courses.txt");
-	protected StudentComponent studentList = new StudentComponent("Students.txt");
-	
+	protected CourseComponent courseList;
+	protected StudentComponent studentList;
 	private String sReservationFileName;
 	
 	public ReservationComponent(String sReservationFileName) throws FileNotFoundException, IOException {
@@ -95,5 +96,10 @@ public class ReservationComponent {
 			}
 		}
 		return false;
+	}
+	
+	public void initialize() {
+		courseList =  new CourseComponent(new ArrayList<Course>());
+		studentList = new StudentComponent(new ArrayList<Student>());
 	}
 }

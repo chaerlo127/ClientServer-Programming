@@ -51,8 +51,8 @@ public class ClientInputMain {
 					printLogSend(EventId.DeleteCourses);
 					break;
 				case "7":
-					eventBus.sendEvent(new Event(EventId.RegisterReservation, makeReservation()));
-					printLogSend(EventId.RegisterReservation);
+					eventBus.sendEvent(new Event(EventId.RegisterReservationPre, makeReservation()));
+					printLogSend(EventId.RegisterReservationPre);
 					break;
 				case "8":
 					eventBus.sendEvent(new Event(EventId.ListReservations, null));
@@ -114,7 +114,7 @@ public class ClientInputMain {
 		String userInput = "";
 		userInput = setStudentId();
 		userInput += " " + setCourseId();
-		return userInput;
+		return userInput + " ";
 	}
 	//@SuppressWarnings("unused")
 	private static String setStudentId() throws IOException {

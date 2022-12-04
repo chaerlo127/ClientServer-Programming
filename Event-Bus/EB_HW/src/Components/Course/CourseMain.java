@@ -44,6 +44,10 @@ public class CourseMain {
 					printLogEvent("Delete", event);
 					eventBus.sendEvent(new Event(EventId.ClientOutput, deleteCourse(coursesList, event.getMessage())));
 					break;
+				case RegisterReservationPreCourse:
+					printLogEvent("Get", event);
+					eventBus.sendEvent(new Event(EventId.RegisterReservation, registerReservation(coursesList, event.getMessage())));
+					break;
 				case QuitTheSystem:
 					eventBus.unRegister(componentId);
 					done = true;
@@ -53,6 +57,14 @@ public class CourseMain {
 				}
 			}
 		}
+	}
+
+	private static String registerReservation(CourseComponent coursesList, String message) {
+		String returnString = message;
+		for (int j = 0; j < coursesList.vCourse.size(); j++) {
+			returnString += coursesList.getCourseList().get(j).getString() + "\n";
+		}
+		return returnString + "COURSEINFO";
 	}
 
 	private static String registerCourse(CourseComponent coursesList, String message) {

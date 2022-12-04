@@ -22,6 +22,10 @@ public class StudentComponent {
 		}
 		bufferedReader.close();
 	}
+	
+	public StudentComponent(ArrayList<Student> vStudent) {
+		this.vStudent = vStudent;
+	}
 	public ArrayList<Student> getStudentList() {
 		return vStudent;
 	}
