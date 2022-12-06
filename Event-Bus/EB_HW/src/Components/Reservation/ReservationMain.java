@@ -56,7 +56,24 @@ public class ReservationMain {
 	}
 
 	private static String makeRegisterReservation(ReservationComponent reservationsList, String message) {
-		Reservation reservation = parseMessage(reservationsList, message);
+		Scanner st = new Scanner(message);
+		
+		String studentId = st.next();
+		String courseId = st.next();
+		Reservation reservation = new Reservation(studentId + " " + courseId);
+		reservationsList.initialize();
+		
+		String command = st.nextLine();
+		while(!command.equals("STUDENTINFO")) {
+			reservationsList.studentList.getStudentList().add(new Student(command));
+			command = st.nextLine();
+		}
+		command = st.nextLine();
+		while(!command.equals("COURSEINFO")) {
+			reservationsList.courseList.getCourseList().add(new Course(command));
+			command = st.nextLine();
+		}
+		st.close();
 		
 		if(!reservationsList.courseList.isRegisteredCourse(reservation.courseId)) return "This course is not registered. ";
 		if(!reservationsList.studentList.isRegisteredStudent(reservation.studentId)) return "This student is not registered. ";
@@ -74,29 +91,6 @@ public class ReservationMain {
 
 		if(reservationsList.addReservationRecords(message)) return "This course is successfully added. ";
 		else return "This course is not successfully added. ";
-	}
-
-	private static Reservation parseMessage(ReservationComponent reservationsList, String message) {
-		Scanner st = new Scanner(message);
-		
-		String studentId = st.next();
-		String courseId = st.next();
-		Reservation reservation = new Reservation(studentId + " " + courseId);
-		
-		reservationsList.initialize();
-		
-		String command = st.nextLine();
-		while(!command.equals("STUDENTINFO")) {
-			reservationsList.studentList.getStudentList().add(new Student(command));
-			command = st.nextLine();
-		}
-		command = st.nextLine();
-		while(!command.equals("COURSEINFO")) {
-			reservationsList.courseList.getCourseList().add(new Course(command));
-			command = st.nextLine();
-		}
-		st.close();
-		return reservation;
 	}
 
 	private static String makeReservationList(ReservationComponent reservationsList) {

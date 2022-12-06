@@ -29,7 +29,8 @@ public class ClientOutputMain {
 				e.printStackTrace();
 			}
 			EventQueue eventQueue = eventBusInterface.getEventQueue(componentId);
-			for(int i = 0; i < eventQueue.getSize(); i++)  {
+			int size = eventQueue.getSize();
+			for(int i = 0; i < size; i++)  {
 				event = eventQueue.getEvent();
 				if (event.getEventId() == EventId.ClientOutput) {
 					printOutput(event);
