@@ -56,24 +56,24 @@ public class ReservationMain {
 	}
 
 	private static String makeRegisterReservation(ReservationComponent reservationsList, String message) {
-		Scanner st = new Scanner(message);
+		Scanner reservationMessageScan = new Scanner(message);
 		
-		String studentId = st.next();
-		String courseId = st.next();
+		String studentId = reservationMessageScan.next();
+		String courseId = reservationMessageScan.next();
 		Reservation reservation = new Reservation(studentId + " " + courseId);
 		reservationsList.initialize();
 		
-		String command = st.nextLine();
+		String command = reservationMessageScan.nextLine();
 		while(!command.equals("STUDENTINFO")) {
 			reservationsList.studentList.getStudentList().add(new Student(command));
-			command = st.nextLine();
+			command = reservationMessageScan.nextLine();
 		}
-		command = st.nextLine();
+		command = reservationMessageScan.nextLine();
 		while(!command.equals("COURSEINFO")) {
 			reservationsList.courseList.getCourseList().add(new Course(command));
-			command = st.nextLine();
+			command = reservationMessageScan.nextLine();
 		}
-		st.close();
+		reservationMessageScan.close();
 		
 		if(!reservationsList.courseList.isRegisteredCourse(reservation.courseId)) return "This course is not registered. ";
 		if(!reservationsList.studentList.isRegisteredStudent(reservation.studentId)) return "This student is not registered. ";

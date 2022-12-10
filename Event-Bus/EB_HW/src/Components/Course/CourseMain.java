@@ -44,7 +44,7 @@ public class CourseMain {
 					printLogEvent("Delete", event);
 					eventBus.sendEvent(new Event(EventId.ClientOutput, deleteCourse(coursesList, event.getMessage())));
 					break;
-				case RegisterReservationPreCourse:
+				case CourseInfoForReservation:
 					printLogEvent("Get", event);
 					eventBus.sendEvent(new Event(EventId.RegisterReservation, registerReservation(coursesList, event.getMessage())));
 					break;

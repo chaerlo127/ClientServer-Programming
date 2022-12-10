@@ -51,8 +51,8 @@ public class ClientInputMain {
 					printLogSend(EventId.DeleteCourses);
 					break;
 				case "7":
-					eventBus.sendEvent(new Event(EventId.RegisterReservationPre, makeReservation()));
-					printLogSend(EventId.RegisterReservationPre);
+					eventBus.sendEvent(new Event(EventId.StudentInfoForReservation, makeReservation()));
+					printLogSend(EventId.StudentInfoForReservation);
 					break;
 				case "8":
 					eventBus.sendEvent(new Event(EventId.ListReservations, null));
