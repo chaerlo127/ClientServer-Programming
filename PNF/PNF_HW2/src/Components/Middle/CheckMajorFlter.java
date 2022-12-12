@@ -8,9 +8,9 @@ import java.util.Arrays;
 
 import Framework.CommonFilterImpl;
 
-public class MiddleFilter extends CommonFilterImpl{
+public class CheckMajorFlter extends CommonFilterImpl{
 	private String major;
-	public MiddleFilter(String major) {
+	public CheckMajorFlter(String major) {
 		this.major = major;
 	}
 

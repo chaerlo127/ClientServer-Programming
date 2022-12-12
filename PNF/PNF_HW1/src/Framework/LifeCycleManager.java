@@ -4,7 +4,7 @@
 package Framework;
 
 import Components.AddCourseFilter.AddCourseFilter;
-import Components.Middle.MiddleFilter;
+import Components.Middle.CheckMajorFilter;
 import Components.Sink.SinkFilter;
 import Components.Source.FileSourceFilter;
 
@@ -13,7 +13,7 @@ public class LifeCycleManager {
         try {
             CommonFilter studentFilterSource = new FileSourceFilter("Students.txt");
             CommonFilter outputFilterSink = new SinkFilter("Output.txt");
-            CommonFilter middleFilter = new MiddleFilter("CS");
+            CommonFilter middleFilter = new CheckMajorFilter("CS");
             CommonFilter addFilter = new AddCourseFilter("12345", "23456");
             
             studentFilterSource.connectOutputTo(middleFilter);
