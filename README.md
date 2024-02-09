@@ -2,9 +2,6 @@
 
 ## Client and Server [RMI 통신/Process]
 
-### Project Design Structure
-<img src="https://user-images.githubusercontent.com/90203250/208683087-a1d4a71f-27f3-4169-b343-dff83f0bff22.png" width="500" height="250">
-
 ### Sequence Diagram
 
 * Logging
